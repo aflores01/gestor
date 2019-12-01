@@ -212,7 +212,7 @@
             this.Name = "bdeditForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "newReg";
+            this.Text = "Editar registro";
             this.Shown += new System.EventHandler(this.bdeditForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

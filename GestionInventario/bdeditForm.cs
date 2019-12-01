@@ -21,7 +21,10 @@ namespace GestionInventario
         private void button1_Click(object sender, EventArgs e)
         {
             try
-            {/*
+            {
+                string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+                SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
+                string idToUpdate = this.Tag.ToString();
                 using (SQLiteCommand insertData = new SQLiteCommand("UPDATE equipos SET modelo = @modelo , cliente = @cliente , telefono = @telefono ,reparacion = @reparacion ,costo = @costo, coment = @coment WHERE id = " + idToUpdate, sqlCon))
                 {
                     insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
@@ -34,7 +37,7 @@ namespace GestionInventario
                     insertData.ExecuteNonQuery();
                     sqlCon.Close();
                     this.Close();
-                };*/
+                };
             }
             catch (Exception r)
             {
