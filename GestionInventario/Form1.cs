@@ -48,7 +48,7 @@ namespace GestionInventario
                 editarButton.Text = "Editar";
                 editarButton.UseColumnTextForButtonValue = true;
                 editarButton.HeaderText = "Realizar Cambios";
-                int columnIndex = 2;
+                int columnIndex = 0;
                 if (dataGridView1.Columns["Editar"] == null)
                 {
                     dataGridView1.Columns.Insert(columnIndex, editarButton);
@@ -109,14 +109,17 @@ namespace GestionInventario
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index) 
             {
-                //MessageBox.Show(e.ColumnIndex.ToString());
+                DataGridViewRow rowNumber = dataGridView1.Rows[e.RowIndex];
+                string iD = rowNumber.Cells["id"].Value.ToString();
+                Form bdeditForm = new bdeditForm();
+                bdeditForm.Tag = iD;
+                bdeditForm.ShowDialog();
             }
         }
 
         private void Form1_Activated_1(object sender, EventArgs e)
         {
-            loadDB();
-            loadDB2();
+
         }
     }
 }
