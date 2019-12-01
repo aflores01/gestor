@@ -48,8 +48,8 @@ namespace GestionInventario
             {
                 try
                 {
-                    string laUriDelJeringasBienConstruidaALV = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
-                    SQLiteConnection sqlCon = new SQLiteConnection(laUriDelJeringasBienConstruidaALV);
+                    string unaPincheVariableBienMamalonaALV = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+                    SQLiteConnection sqlCon = new SQLiteConnection(unaPincheVariableBienMamalonaALV);
                     using (SQLiteCommand insertData = new SQLiteCommand("INSERT INTO equipos (modelo,cliente,fecha,telefono,reparacion,costo,coment) values(@modelo,@cliente,@fecha,@telefono,@reparacion,@costo,@coment)", sqlCon))
                     {
                         insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
