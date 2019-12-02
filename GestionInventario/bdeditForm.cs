@@ -13,9 +13,17 @@ namespace GestionInventario
 {
     public partial class bdeditForm : Form
     {
-        public bdeditForm()
+        string dataBaseSelected = "";
+        public bdeditForm(string selectedBD)
         {
             InitializeComponent();
+            if (selectedBD == "Soluciones Informaticas")
+            {
+                dataBaseSelected = "equipos";
+            } else if (selectedBD == "DK Laboratorio Celular")
+            {
+                dataBaseSelected = "local";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,8 +33,9 @@ namespace GestionInventario
                 string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
                 SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
                 string idToUpdate = this.Tag.ToString();
-                using (SQLiteCommand insertData = new SQLiteCommand("UPDATE equipos SET modelo = @modelo , cliente = @cliente , telefono = @telefono ,reparacion = @reparacion ,costo = @costo, coment = @coment WHERE id = " + idToUpdate, sqlCon))
+                using (SQLiteCommand insertData = new SQLiteCommand("UPDATE @base SET modelo = @modelo , cliente = @cliente , telefono = @telefono ,reparacion = @reparacion ,costo = @costo, coment = @coment WHERE id = " + idToUpdate, sqlCon))
                 {
+                    insertData.Parameters.Add(new SQLiteParameter("@base") { Value = dataBaseSelected });
                     insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
                     insertData.Parameters.Add(new SQLiteParameter("@cliente") { Value = inputCliente.Text });
                     insertData.Parameters.Add(new SQLiteParameter("@telefono") { Value = inputTelefono.Text });
@@ -53,7 +62,7 @@ namespace GestionInventario
                 string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
                 SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
                 sqlCon.Open();
-                SQLiteDataAdapter adptSelect = new SQLiteDataAdapter("SELECT * FROM equipos WHERE id = " + idToUpdate, sqlCon);
+                SQLiteDataAdapter adptSelect = new SQLiteDataAdapter("SELECT * FROM " + dataBaseSelected + " WHERE id = " + idToUpdate, sqlCon);
                 DataSet dt = new DataSet();
                 adptSelect.Fill(dt);
                 inputEquipo.Text = dt.Tables[0].Rows[0]["modelo"].ToString();
@@ -66,7 +75,7 @@ namespace GestionInventario
             }
             catch (Exception r)
             {
-                MessageBox.Show(r.ToString());
+                MessageBox.Show(dataBaseSelected);
             }
         }
     }

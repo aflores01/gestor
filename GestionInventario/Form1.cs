@@ -27,7 +27,15 @@ namespace GestionInventario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form newReg = new newReg();
+            string dataBase = "";
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                dataBase = "equipos";
+            } else if (tabControl1.SelectedTab == tabPage2)
+            {
+                dataBase = "local";
+            }
+            Form newReg = new newReg(dataBase);
             newReg.ShowDialog();
             debugStatusBar.Text = "Actualizado";
         }
@@ -88,11 +96,11 @@ namespace GestionInventario
                     dataGridtab2.Columns.Insert(columnIndex, editarButton);
                 }
                 dataGridtab2.CellClick += DataGridtab2_CellClick;
-                //end
+                //end 
             }
             catch (Exception e)
             {
-                debugStatusBar.Text = "Conexión fallida: " + e.ToString();
+                debugStatusBar.Text = "No hay datos a mostrar.";
             }
             finally
             {
@@ -111,7 +119,8 @@ namespace GestionInventario
             {
                 DataGridViewRow rowNumber = dataGridView1.Rows[e.RowIndex];
                 string iD = rowNumber.Cells["id"].Value.ToString();
-                Form bdeditForm = new bdeditForm();
+                string selectedBD = tabPage1.Text;
+                Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
                 bdeditForm.ShowDialog();
             }
