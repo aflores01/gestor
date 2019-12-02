@@ -75,7 +75,7 @@ namespace GestionInventario
             }
             catch (Exception r)
             {
-                MessageBox.Show(dataBaseSelected);
+                MessageBox.Show(r.ToString());
             }
         }
     }

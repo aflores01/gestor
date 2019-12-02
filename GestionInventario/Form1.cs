@@ -51,11 +51,13 @@ namespace GestionInventario
                 adpt.Fill(dT);
                 dataGridView1.DataSource = dT;
                 //datagridviewbuttoncolum
-                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn();
-                editarButton.Name = "Editar";
-                editarButton.Text = "Editar";
-                editarButton.UseColumnTextForButtonValue = true;
-                editarButton.HeaderText = "Realizar Cambios";
+                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
+                {
+                    Name = "Editar",
+                    Text = "Editar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Realizar Cambios"
+                };
                 int columnIndex = 0;
                 if (dataGridView1.Columns["Editar"] == null)
                 {
@@ -85,12 +87,14 @@ namespace GestionInventario
                 adpt.Fill(dT);
                 dataGridtab2.DataSource = dT;
                 //datagridviewbuttoncolum
-                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn();
-                editarButton.Name = "Editar";
-                editarButton.Text = "Editar";
-                editarButton.UseColumnTextForButtonValue = true;
-                editarButton.HeaderText = "Realizar Cambios";
-                int columnIndex = 2;
+                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
+                {
+                    Name = "Editar",
+                    Text = "Editar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Realizar Cambios"
+                };
+                int columnIndex = 0;
                 if (dataGridtab2.Columns["Editar"] == null)
                 {
                     dataGridtab2.Columns.Insert(columnIndex, editarButton);
@@ -110,7 +114,15 @@ namespace GestionInventario
 
         private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
+            {
+                DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
+                string iD = rowNumber.Cells["id"].Value.ToString();
+                string selectedBD = tabPage2.Text;
+                Form bdeditForm = new bdeditForm(selectedBD);
+                bdeditForm.Tag = iD;
+                bdeditForm.ShowDialog();
+            }
         }
 
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
