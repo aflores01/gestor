@@ -202,6 +202,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
+            this.Text = "Inventarios & venta";
             this.Activated += new System.EventHandler(this.Form1_Activated_1);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

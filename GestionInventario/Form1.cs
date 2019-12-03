@@ -14,9 +14,9 @@ namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
         SQLiteConnection sqlCon = new SQLiteConnection(urI);
-
+        
         public Form1()
         {
             InitializeComponent();
