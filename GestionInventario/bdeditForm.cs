@@ -33,7 +33,7 @@ namespace GestionInventario
                 string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
                 SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
                 string idToUpdate = this.Tag.ToString();
-                using (SQLiteCommand insertData = new SQLiteCommand("UPDATE @base SET modelo = @modelo , cliente = @cliente , telefono = @telefono ,reparacion = @reparacion ,costo = @costo, coment = @coment WHERE id = " + idToUpdate, sqlCon))
+                using (SQLiteCommand insertData = new SQLiteCommand("UPDATE "+ dataBaseSelected +" SET modelo = @modelo , cliente = @cliente , telefono = @telefono ,reparacion = @reparacion ,costo = @costo, coment = @coment WHERE id = " + idToUpdate, sqlCon))
                 {
                     insertData.Parameters.Add(new SQLiteParameter("@base") { Value = dataBaseSelected });
                     insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
