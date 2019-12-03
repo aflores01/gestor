@@ -13,9 +13,11 @@ namespace GestionInventario
 {
     public partial class newReg : Form
     {
-        public newReg()
+        string baseSelected = "";
+        public newReg(string dbSelect)
         {
             InitializeComponent();
+            baseSelected = dbSelect;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace GestionInventario
                 {
                     string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
                     SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
-                    using (SQLiteCommand insertData = new SQLiteCommand("INSERT INTO equipos (modelo,cliente,fecha,telefono,reparacion,costo,coment) values(@modelo,@cliente,@fecha,@telefono,@reparacion,@costo,@coment)", sqlCon))
+                    using (SQLiteCommand insertData = new SQLiteCommand("INSERT INTO "+ baseSelected +" (modelo,cliente,fecha,telefono,reparacion,costo,coment) values(@modelo,@cliente,@fecha,@telefono,@reparacion,@costo,@coment)", sqlCon))
                     {
                         insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
                         insertData.Parameters.Add(new SQLiteParameter("@cliente") { Value = inputCliente.Text });

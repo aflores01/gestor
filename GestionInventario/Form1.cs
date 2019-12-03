@@ -27,7 +27,15 @@ namespace GestionInventario
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form newReg = new newReg();
+            string dataBase = "";
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                dataBase = "equipos";
+            } else if (tabControl1.SelectedTab == tabPage2)
+            {
+                dataBase = "local";
+            }
+            Form newReg = new newReg(dataBase);
             newReg.ShowDialog();
             debugStatusBar.Text = "Actualizado";
         }
@@ -43,12 +51,14 @@ namespace GestionInventario
                 adpt.Fill(dT);
                 dataGridView1.DataSource = dT;
                 //datagridviewbuttoncolum
-                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn();
-                editarButton.Name = "Editar";
-                editarButton.Text = "Editar";
-                editarButton.UseColumnTextForButtonValue = true;
-                editarButton.HeaderText = "Realizar Cambios";
-                int columnIndex = 2;
+                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
+                {
+                    Name = "Editar",
+                    Text = "Editar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Realizar Cambios"
+                };
+                int columnIndex = 0;
                 if (dataGridView1.Columns["Editar"] == null)
                 {
                     dataGridView1.Columns.Insert(columnIndex, editarButton);
@@ -77,22 +87,24 @@ namespace GestionInventario
                 adpt.Fill(dT);
                 dataGridtab2.DataSource = dT;
                 //datagridviewbuttoncolum
-                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn();
-                editarButton.Name = "Editar";
-                editarButton.Text = "Editar";
-                editarButton.UseColumnTextForButtonValue = true;
-                editarButton.HeaderText = "Realizar Cambios";
-                int columnIndex = 2;
+                DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
+                {
+                    Name = "Editar",
+                    Text = "Editar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Realizar Cambios"
+                };
+                int columnIndex = 0;
                 if (dataGridtab2.Columns["Editar"] == null)
                 {
                     dataGridtab2.Columns.Insert(columnIndex, editarButton);
                 }
                 dataGridtab2.CellClick += DataGridtab2_CellClick;
-                //end
+                //end 
             }
             catch (Exception e)
             {
-                debugStatusBar.Text = "Conexión fallida: " + e.ToString();
+                debugStatusBar.Text = "No hay datos a mostrar.";
             }
             finally
             {
@@ -102,18 +114,36 @@ namespace GestionInventario
 
         private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
+            {
+                DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
+                string iD = rowNumber.Cells["id"].Value.ToString();
+                string selectedBD = tabPage2.Text;
+                Form bdeditForm = new bdeditForm(selectedBD);
+                bdeditForm.Tag = iD;
+                bdeditForm.ShowDialog();
+            }
         }
 
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index) 
             {
-                //MessageBox.Show(e.ColumnIndex.ToString());
+                DataGridViewRow rowNumber = dataGridView1.Rows[e.RowIndex];
+                string iD = rowNumber.Cells["id"].Value.ToString();
+                string selectedBD = tabPage1.Text;
+                Form bdeditForm = new bdeditForm(selectedBD);
+                bdeditForm.Tag = iD;
+                bdeditForm.ShowDialog();
             }
         }
 
         private void Form1_Activated_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             loadDB();
             loadDB2();
