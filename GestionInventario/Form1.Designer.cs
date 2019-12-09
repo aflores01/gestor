@@ -50,6 +50,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TotalBox = new System.Windows.Forms.TextBox();
             this.cashButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.addInvReg = new System.Windows.Forms.Button();
+            this.showEx = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -58,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridtab2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopList)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -149,6 +153,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.panel1);
             this.tabPage3.Controls.Add(this.cashButton);
             this.tabPage3.Controls.Add(this.TotalBox);
             this.tabPage3.Controls.Add(this.label4);
@@ -217,6 +222,7 @@
             this.shopList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.shopList.BackgroundColor = System.Drawing.SystemColors.Window;
             this.shopList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shopList.Location = new System.Drawing.Point(3, 40);
             this.shopList.Name = "shopList";
@@ -294,6 +300,38 @@
             this.cashButton.Text = "Cobrar";
             this.cashButton.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.showEx);
+            this.panel1.Controls.Add(this.addInvReg);
+            this.panel1.Location = new System.Drawing.Point(9, 349);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(515, 102);
+            this.panel1.TabIndex = 11;
+            // 
+            // addInvReg
+            // 
+            this.addInvReg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addInvReg.Location = new System.Drawing.Point(4, 6);
+            this.addInvReg.Name = "addInvReg";
+            this.addInvReg.Size = new System.Drawing.Size(144, 30);
+            this.addInvReg.TabIndex = 0;
+            this.addInvReg.Text = "Añadir al inventario";
+            this.addInvReg.UseVisualStyleBackColor = true;
+            this.addInvReg.Click += new System.EventHandler(this.addInvReg_Click);
+            // 
+            // showEx
+            // 
+            this.showEx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showEx.Location = new System.Drawing.Point(4, 42);
+            this.showEx.Name = "showEx";
+            this.showEx.Size = new System.Drawing.Size(144, 30);
+            this.showEx.TabIndex = 1;
+            this.showEx.Text = "Ver existencias";
+            this.showEx.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +355,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopList)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,6 +385,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView shopList;
         private System.Windows.Forms.Button cashButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button addInvReg;
+        private System.Windows.Forms.Button showEx;
     }
 }
 

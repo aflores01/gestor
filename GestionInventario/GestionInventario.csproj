@@ -93,6 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addToInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addToInv.Designer.cs">
+      <DependentUpon>addToInv.cs</DependentUpon>
+    </Compile>
     <Compile Include="bdeditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="addToInv.resx">
+      <DependentUpon>addToInv.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="bdeditForm.resx">
       <DependentUpon>bdeditForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -150,5 +150,11 @@ namespace GestionInventario
             loadDB();
             loadDB2();
         }
+
+        private void addInvReg_Click(object sender, EventArgs e)
+        {
+            Form addToInv = new addToInv();
+            addToInv.ShowDialog();
+        }
     }
 }
