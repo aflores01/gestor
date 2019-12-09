@@ -52,7 +52,6 @@ namespace GestionInventario
                 DataTable dT = new DataTable();
                 adpt.Fill(dT);
                 dataGridView1.DataSource = dT;
-                //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
                     Name = "Editar",
@@ -66,7 +65,6 @@ namespace GestionInventario
                     dataGridView1.Columns.Insert(columnIndex, editarButton);
                 }
                 dataGridView1.CellClick += DataGridView1_CellClick;
-                //end
             }
             catch (Exception e)
             {
@@ -155,6 +153,20 @@ namespace GestionInventario
         {
             Form addToInv = new addToInv();
             addToInv.ShowDialog();
+        }
+
+        private void searchItemButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(searchBox.Text))
+            {
+                MessageBox.Show("Introduce tu busqueda");
+            }
+            else 
+            {
+                string busqueda = searchBox.Text;
+                Form searchPos = new searchResultsPOS(busqueda);
+                searchPos.ShowDialog();
+            }
         }
     }
 }

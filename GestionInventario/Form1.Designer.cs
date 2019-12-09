@@ -216,6 +216,7 @@
             this.searchItemButton.TabIndex = 2;
             this.searchItemButton.Text = "Buscar";
             this.searchItemButton.UseVisualStyleBackColor = true;
+            this.searchItemButton.Click += new System.EventHandler(this.searchItemButton_Click);
             // 
             // shopList
             // 
