@@ -31,13 +31,15 @@ namespace GestionInventario
             if (tabControl1.SelectedTab == tabPage1)
             {
                 dataBase = "equipos";
+                Form newReg = new newReg(dataBase);
+                newReg.ShowDialog();
             } else if (tabControl1.SelectedTab == tabPage2)
             {
                 dataBase = "local";
+                Form newReg = new newReg(dataBase);
+                newReg.ShowDialog();
             }
-            Form newReg = new newReg(dataBase);
-            newReg.ShowDialog();
-            debugStatusBar.Text = "Actualizado";
+            debugStatusBar.Text = "No se puede insertar registro: Use el control de inventarios interno.";
         }
 
         public void loadDB()
