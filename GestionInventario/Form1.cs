@@ -60,10 +60,39 @@ namespace GestionInventario
             try
             {
                 sqlCon.Open();
+                SQLiteDataAdapter saldoAdpt = new SQLiteDataAdapter("SELECT SUM(costo) FROM equipos", sqlCon);
+                DataTable saldoDT = new DataTable();
+                saldoAdpt.Fill(saldoDT);
+                saldoLabel.Text = "$" + saldoDT.Rows[0][0].ToString();
+                //
+                SQLiteDataAdapter cashAdpt = new SQLiteDataAdapter("SELECT SUM(saldo) FROM equipos", sqlCon);
+                DataTable cashDT = new DataTable();
+                cashAdpt.Fill(cashDT);
+                totalCashLabel.Text = "$" + cashDT.Rows[0][0].ToString();
+                //
+                SQLiteDataAdapter operAdp = new SQLiteDataAdapter("SELECT SUM(costo) - SUM(saldo) FROM equipos", sqlCon);
+                DataTable resultDT = new DataTable();
+                operAdp.Fill(resultDT);
+                adeudCashLabel.Text = "$" + resultDT.Rows[0][0].ToString();
+                //
                 SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM equipos", sqlCon);
                 DataTable dT = new DataTable();
                 adpt.Fill(dT);
                 dataGridView1.DataSource = dT;
+                //
+                DataGridViewButtonColumn delButn = new DataGridViewButtonColumn 
+                {
+                    Name = "Borrar",
+                    Text = "Borrar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Eliminar registro"
+                };
+                if (dataGridView1.Columns["Borrar"] == null)
+                {
+                    dataGridView1.Columns.Insert(0, delButn);
+                }
+
+                //
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
                     Name = "Editar",
@@ -152,6 +181,25 @@ namespace GestionInventario
                 bdeditForm.Tag = iD;
                 if (bdeditForm.ShowDialog() == DialogResult.OK) 
                 {
+                    loadDB();
+                    loadDB2();
+                }
+            }
+            if (e.ColumnIndex == dataGridView1.Columns["Borrar"].Index) 
+            {
+                DialogResult dgR = MessageBox.Show("Se borrará el registro ¿Estás Seguro?", "Confirmar", MessageBoxButtons.YesNo);
+                if (dgR == DialogResult.Yes)
+                {
+                    DataGridViewRow rowNum = dataGridView1.Rows[e.RowIndex];
+                    string iD = rowNum.Cells["id"].Value.ToString();
+                    string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+                    SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
+                    using (SQLiteCommand delCmnd = new SQLiteCommand("DELETE FROM equipos WHERE id = " + iD, sqlCon)) 
+                    {
+                        sqlCon.Open();
+                        delCmnd.ExecuteNonQuery();
+                        sqlCon.Close();
+                    };
                     loadDB();
                     loadDB2();
                 }
