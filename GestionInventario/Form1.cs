@@ -32,14 +32,26 @@ namespace GestionInventario
             {
                 dataBase = "equipos";
                 Form newReg = new newReg(dataBase);
-                newReg.ShowDialog();
-            } else if (tabControl1.SelectedTab == tabPage2)
+                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
             {
                 dataBase = "local";
                 Form newReg = new newReg(dataBase);
-                newReg.ShowDialog();
+                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
-            debugStatusBar.Text = "No se puede insertar registro: Use el control de inventarios interno.";
+            else
+            {
+                debugStatusBar.Text = "No se puede insertar registro: Use el control de inventarios interno.";
+            }
         }
 
         public void loadDB()
@@ -121,7 +133,11 @@ namespace GestionInventario
                 string selectedBD = tabPage2.Text;
                 Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
-                bdeditForm.ShowDialog();
+                if (bdeditForm.ShowDialog() == DialogResult.OK || bdeditForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
         }
 
@@ -134,19 +150,12 @@ namespace GestionInventario
                 string selectedBD = tabPage1.Text;
                 Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
-                bdeditForm.ShowDialog();
+                if (bdeditForm.ShowDialog() == DialogResult.OK) 
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
-        }
-
-        private void Form1_Activated_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            loadDB();
-            loadDB2();
         }
 
         private void addInvReg_Click(object sender, EventArgs e)
@@ -174,6 +183,17 @@ namespace GestionInventario
         {
             Form newForm = new storedInv();
             newForm.ShowDialog();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form newIncoming = new incomingRecord();
+            if (newIncoming.ShowDialog() == DialogResult.OK)
+            {
+                loadDB();
+                loadDB2();
+            }
         }
     }
 }
