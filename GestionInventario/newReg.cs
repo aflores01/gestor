@@ -64,7 +64,6 @@ namespace GestionInventario
                         sqlCon.Open();
                         insertData.ExecuteNonQuery();
                         sqlCon.Close();
-                        this.Close();
                     };
                 }
                 catch (Exception r)

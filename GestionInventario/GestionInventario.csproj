@@ -93,6 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addToInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addToInv.Designer.cs">
+      <DependentUpon>addToInv.cs</DependentUpon>
+    </Compile>
     <Compile Include="bdeditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="incomingRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="incomingRecord.Designer.cs">
+      <DependentUpon>incomingRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="newReg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,11 +125,35 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="qtyEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="qtyEdit.Designer.cs">
+      <DependentUpon>qtyEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="searchResultsPOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="searchResultsPOS.Designer.cs">
+      <DependentUpon>searchResultsPOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="storedInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="storedInv.Designer.cs">
+      <DependentUpon>storedInv.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="addToInv.resx">
+      <DependentUpon>addToInv.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="bdeditForm.resx">
       <DependentUpon>bdeditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incomingRecord.resx">
+      <DependentUpon>incomingRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="newReg.resx">
       <DependentUpon>newReg.cs</DependentUpon>
@@ -135,6 +171,15 @@
     <Content Include="data.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="qtyEdit.resx">
+      <DependentUpon>qtyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="searchResultsPOS.resx">
+      <DependentUpon>searchResultsPOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="storedInv.resx">
+      <DependentUpon>storedInv.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="GestionInventario_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

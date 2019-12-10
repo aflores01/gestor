@@ -14,9 +14,9 @@ namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
         SQLiteConnection sqlCon = new SQLiteConnection(urI);
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -31,13 +31,27 @@ namespace GestionInventario
             if (tabControl1.SelectedTab == tabPage1)
             {
                 dataBase = "equipos";
-            } else if (tabControl1.SelectedTab == tabPage2)
+                Form newReg = new newReg(dataBase);
+                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
             {
                 dataBase = "local";
+                Form newReg = new newReg(dataBase);
+                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
-            Form newReg = new newReg(dataBase);
-            newReg.ShowDialog();
-            debugStatusBar.Text = "Actualizado";
+            else
+            {
+                debugStatusBar.Text = "No se puede insertar registro: Use el control de inventarios interno.";
+            }
         }
 
         public void loadDB()
@@ -50,7 +64,6 @@ namespace GestionInventario
                 DataTable dT = new DataTable();
                 adpt.Fill(dT);
                 dataGridView1.DataSource = dT;
-                //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
                     Name = "Editar",
@@ -64,7 +77,6 @@ namespace GestionInventario
                     dataGridView1.Columns.Insert(columnIndex, editarButton);
                 }
                 dataGridView1.CellClick += DataGridView1_CellClick;
-                //end
             }
             catch (Exception e)
             {
@@ -102,7 +114,7 @@ namespace GestionInventario
                 dataGridtab2.CellClick += DataGridtab2_CellClick;
                 //end 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 debugStatusBar.Text = "No hay datos a mostrar.";
             }
@@ -121,7 +133,11 @@ namespace GestionInventario
                 string selectedBD = tabPage2.Text;
                 Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
-                bdeditForm.ShowDialog();
+                if (bdeditForm.ShowDialog() == DialogResult.OK || bdeditForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
         }
 
@@ -134,19 +150,50 @@ namespace GestionInventario
                 string selectedBD = tabPage1.Text;
                 Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
-                bdeditForm.ShowDialog();
+                if (bdeditForm.ShowDialog() == DialogResult.OK) 
+                {
+                    loadDB();
+                    loadDB2();
+                }
             }
         }
 
-        private void Form1_Activated_1(object sender, EventArgs e)
+        private void addInvReg_Click(object sender, EventArgs e)
         {
+            Form addToInv = new addToInv();
+            addToInv.ShowDialog();
+        }
+
+        private void searchItemButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(searchBox.Text))
+            {
+                MessageBox.Show("Introduce tu busqueda");
+            }
+            else 
+            {
+                string busqueda = searchBox.Text;
+                Form searchPos = new searchResultsPOS(busqueda);
+                searchPos.ShowDialog();
+                searchBox.Text = "";
+            }
+        }
+
+        private void showEx_Click(object sender, EventArgs e)
+        {
+            Form newForm = new storedInv();
+            newForm.ShowDialog();
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            loadDB();
-            loadDB2();
+            Form newIncoming = new incomingRecord();
+            if (newIncoming.ShowDialog() == DialogResult.OK)
+            {
+                loadDB();
+                loadDB2();
+            }
         }
     }
 }
