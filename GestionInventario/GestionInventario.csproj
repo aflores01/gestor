@@ -119,11 +119,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="qtyEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="qtyEdit.Designer.cs">
+      <DependentUpon>qtyEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="searchResultsPOS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="searchResultsPOS.Designer.cs">
       <DependentUpon>searchResultsPOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="storedInv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="storedInv.Designer.cs">
+      <DependentUpon>storedInv.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="addToInv.resx">
       <DependentUpon>addToInv.cs</DependentUpon>
@@ -150,8 +162,14 @@
     <Content Include="data.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="qtyEdit.resx">
+      <DependentUpon>qtyEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="searchResultsPOS.resx">
       <DependentUpon>searchResultsPOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="storedInv.resx">
+      <DependentUpon>storedInv.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="GestionInventario_TemporaryKey.pfx" />
     <None Include="packages.config" />

@@ -102,7 +102,7 @@ namespace GestionInventario
                 dataGridtab2.CellClick += DataGridtab2_CellClick;
                 //end 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 debugStatusBar.Text = "No hay datos a mostrar.";
             }
@@ -166,7 +166,14 @@ namespace GestionInventario
                 string busqueda = searchBox.Text;
                 Form searchPos = new searchResultsPOS(busqueda);
                 searchPos.ShowDialog();
+                searchBox.Text = "";
             }
+        }
+
+        private void showEx_Click(object sender, EventArgs e)
+        {
+            Form newForm = new storedInv();
+            newForm.ShowDialog();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace GestionInventario
 
         private void SearchResultGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            //
         }
     }
 }
