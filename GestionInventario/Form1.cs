@@ -23,6 +23,7 @@ namespace GestionInventario
             loadDB();
             loadDB2();
             debugStatusBar.Text = "Conexión a base de datos correcta";
+            DataTable shopTable = new DataTable();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -221,9 +222,23 @@ namespace GestionInventario
             else 
             {
                 string busqueda = searchBox.Text;
-                Form searchPos = new searchResultsPOS(busqueda);
-                searchPos.ShowDialog();
                 searchBox.Text = "";
+                using (searchResultsPOS searchPos = new searchResultsPOS(busqueda)) 
+                {
+                    if (searchPos.ShowDialog() == DialogResult.OK)
+                    {
+                        sqlCon.Open();
+                        SQLiteDataAdapter sqlA = new SQLiteDataAdapter("SELECT * FROM inventario WHERE id = " + searchPos.artId, sqlCon);
+                        DataTable dT = new DataTable();
+                        sqlA.Fill(dT);
+                        sqlCon.Close();
+                        int rowCount = shopList.Rows.Add();
+                        DataGridViewRow newRow = shopList.Rows[rowCount];
+                        newRow.Cells[0].Value = dT.Rows[0]["name"].ToString();
+                        newRow.Cells[1].Value = "1";
+                        newRow.Cells[2].Value = dT.Rows[0]["price"].ToString();
+                    } 
+                }
             }
         }
 
