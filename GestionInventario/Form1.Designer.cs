@@ -48,10 +48,13 @@
             this.subTotalBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.shopList = new System.Windows.Forms.DataGridView();
+            this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchItemButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.sqLiteCommand1 = new System.Data.SQLite.SQLiteCommand();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.adeudCashLabel = new System.Windows.Forms.Label();
@@ -60,10 +63,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.totalCashLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -222,12 +221,13 @@
             // cashButton
             // 
             this.cashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cashButton.BackgroundImage = global::GestionInventario.Properties.Resources.checkout;
+            this.cashButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cashButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cashButton.Location = new System.Drawing.Point(788, 349);
             this.cashButton.Name = "cashButton";
             this.cashButton.Size = new System.Drawing.Size(150, 100);
             this.cashButton.TabIndex = 10;
-            this.cashButton.Text = "Cobrar";
             this.cashButton.UseVisualStyleBackColor = true;
             // 
             // TotalBox
@@ -236,8 +236,10 @@
             this.TotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotalBox.Location = new System.Drawing.Point(642, 421);
             this.TotalBox.Name = "TotalBox";
+            this.TotalBox.ReadOnly = true;
             this.TotalBox.Size = new System.Drawing.Size(140, 30);
             this.TotalBox.TabIndex = 9;
+            this.TotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
@@ -258,6 +260,9 @@
             this.disccountBox.Name = "disccountBox";
             this.disccountBox.Size = new System.Drawing.Size(140, 30);
             this.disccountBox.TabIndex = 7;
+            this.disccountBox.Text = "0";
+            this.disccountBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.disccountBox.TextChanged += new System.EventHandler(this.disccountBox_TextChanged);
             // 
             // label3
             // 
@@ -276,8 +281,10 @@
             this.subTotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.subTotalBox.Location = new System.Drawing.Point(642, 349);
             this.subTotalBox.Name = "subTotalBox";
+            this.subTotalBox.ReadOnly = true;
             this.subTotalBox.Size = new System.Drawing.Size(140, 30);
             this.subTotalBox.TabIndex = 5;
+            this.subTotalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
@@ -307,7 +314,31 @@
             this.shopList.Name = "shopList";
             this.shopList.Size = new System.Drawing.Size(935, 303);
             this.shopList.TabIndex = 3;
-            this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.shopList_CellValueChanged);
+            this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopList_CellValueChanged);
+            // 
+            // articulo
+            // 
+            this.articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.articulo.HeaderText = "Descripción";
+            this.articulo.Name = "articulo";
+            this.articulo.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.HeaderText = "Cantidad";
+            this.qty.Name = "qty";
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Precio";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // totalQty
+            // 
+            this.totalQty.HeaderText = "Total";
+            this.totalQty.Name = "totalQty";
+            this.totalQty.ReadOnly = true;
             // 
             // searchItemButton
             // 
@@ -340,10 +371,6 @@
             this.label1.Size = new System.Drawing.Size(90, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Producto";
-            // 
-            // sqLiteCommand1
-            // 
-            this.sqLiteCommand1.CommandText = null;
             // 
             // button2
             // 
@@ -433,30 +460,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "CAJA TOTAL SOLUCIONES";
             // 
-            // articulo
-            // 
-            this.articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.articulo.HeaderText = "Descripción";
-            this.articulo.Name = "articulo";
-            this.articulo.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Cantidad";
-            this.qty.Name = "qty";
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Precio";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // totalQty
-            // 
-            this.totalQty.HeaderText = "Total";
-            this.totalQty.Name = "totalQty";
-            this.totalQty.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,7 +502,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridtab2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Data.SQLite.SQLiteCommand sqLiteCommand1;
         private System.Windows.Forms.Button searchItemButton;
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label label1;
