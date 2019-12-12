@@ -307,6 +307,7 @@
             this.shopList.Name = "shopList";
             this.shopList.Size = new System.Drawing.Size(935, 303);
             this.shopList.TabIndex = 3;
+            this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.shopList_CellValueChanged);
             // 
             // searchItemButton
             // 

@@ -246,7 +246,6 @@ namespace GestionInventario
         {
             Form newForm = new storedInv();
             newForm.ShowDialog();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -256,6 +255,21 @@ namespace GestionInventario
             {
                 loadDB();
                 loadDB2();
+            }
+        }
+
+        private void shopList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataGridViewRow updateRow = shopList.CurrentRow;
+                int valor1 = int.Parse(updateRow.Cells["qty"].Value.ToString());
+                int valor2 = int.Parse(updateRow.Cells["price"].Value.ToString());
+                updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString() ;
+            }
+            catch (Exception v)
+            {
+                //MessageBox.Show(v.ToString());
             }
         }
     }
