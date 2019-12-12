@@ -279,7 +279,7 @@ namespace GestionInventario
             }
             catch
             {
-                //MessageBox.Show(v.ToString());
+                
             }
         }
 
