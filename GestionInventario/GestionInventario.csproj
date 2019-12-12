@@ -143,6 +143,7 @@
     <Compile Include="storedInv.Designer.cs">
       <DependentUpon>storedInv.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\checkout.png" />
     <EmbeddedResource Include="addToInv.resx">
       <DependentUpon>addToInv.cs</DependentUpon>
     </EmbeddedResource>

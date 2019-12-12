@@ -258,7 +258,7 @@ namespace GestionInventario
             }
         }
 
-        private void shopList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void ShopList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -266,11 +266,32 @@ namespace GestionInventario
                 int valor1 = int.Parse(updateRow.Cells["qty"].Value.ToString());
                 int valor2 = int.Parse(updateRow.Cells["price"].Value.ToString());
                 updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString() ;
+                int suma = 0;
+                foreach (DataGridViewRow row in shopList.Rows) 
+                {
+                    int totalCount = int.Parse(row.Cells["totalQty"].Value.ToString());
+                    suma += totalCount;
+                    subTotalBox.Text = suma.ToString();
+                }
+                int subtotalValue = int.Parse(subTotalBox.Text);
+                int totalDiscount = int.Parse(disccountBox.Text);
+                TotalBox.Text = (subtotalValue - totalDiscount).ToString();
             }
-            catch (Exception v)
+            catch
             {
-                //MessageBox.Show(v.ToString());
+                
             }
+        }
+
+        private void disccountBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int subtotalValue = int.Parse(subTotalBox.Text);
+                int totalDiscount = int.Parse(disccountBox.Text);
+                TotalBox.Text = (subtotalValue - totalDiscount).ToString();
+            }
+            catch { }
         }
     }
 }
