@@ -13,6 +13,7 @@ namespace GestionInventario
 {
     public partial class searchResultsPOS : Form
     {
+        public string artId { get; set; }
         public searchResultsPOS(string busqueda)
         {
             InitializeComponent();
@@ -39,7 +40,13 @@ namespace GestionInventario
 
         private void SearchResultGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //
+            if (e.ColumnIndex == searchResultGrid.Columns["SelectedButton"].Index) 
+            {
+                DataGridViewRow dgbR = searchResultGrid.Rows[e.RowIndex];
+                artId =  dgbR.Cells["id"].Value.ToString();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }
