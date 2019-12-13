@@ -65,8 +65,8 @@
             this.totalCashLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.viewSales = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.clienTextBox = new System.Windows.Forms.TextBox();
+            this.comentBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -197,8 +197,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.comentBox);
+            this.panel1.Controls.Add(this.clienTextBox);
             this.panel1.Controls.Add(this.viewSales);
             this.panel1.Controls.Add(this.showEx);
             this.panel1.Controls.Add(this.addInvReg);
@@ -491,26 +491,26 @@
             this.viewSales.UseVisualStyleBackColor = true;
             this.viewSales.Click += new System.EventHandler(this.viewSales_Click);
             // 
-            // textBox1
+            // clienTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.clienTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(211, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(301, 23);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "Mostrador";
+            this.clienTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clienTextBox.Location = new System.Drawing.Point(211, 10);
+            this.clienTextBox.Name = "clienTextBox";
+            this.clienTextBox.Size = new System.Drawing.Size(301, 23);
+            this.clienTextBox.TabIndex = 3;
+            this.clienTextBox.Text = "Mostrador";
             // 
-            // textBox2
+            // comentBox
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(211, 46);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(301, 23);
-            this.textBox2.TabIndex = 4;
+            this.comentBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comentBox.Location = new System.Drawing.Point(211, 46);
+            this.comentBox.Name = "comentBox";
+            this.comentBox.Size = new System.Drawing.Size(301, 23);
+            this.comentBox.TabIndex = 4;
             // 
             // label8
             // 
@@ -603,8 +603,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
         private System.Windows.Forms.Button viewSales;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox comentBox;
+        private System.Windows.Forms.TextBox clienTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
     }

@@ -238,6 +238,7 @@ namespace GestionInventario
                         newRow.Cells["articulo"].Value = dT.Rows[0]["name"].ToString();
                         newRow.Cells["qty"].Value = "1";
                         newRow.Cells["price"].Value = dT.Rows[0]["price"].ToString();
+                        newRow.Cells["totalQty"].Value = dT.Rows[0]["price"].ToString();
                     } 
                 }
             }
@@ -305,10 +306,10 @@ namespace GestionInventario
                 iditemList.Add(row.Cells["id"].Value.ToString());
                 priceitemList.Add(row.Cells["price"].Value.ToString());
                 qtyitemList.Add(row.Cells["qty"].Value.ToString());
-                SQLiteDataAdapter sqlDadp = new SQLiteDataAdapter("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value , sqlCon);
+                SQLiteDataAdapter sqlDadp = new SQLiteDataAdapter("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value, sqlCon);
                 DataTable dtID = new DataTable();
                 sqlDadp.Fill(dtID);
-                int cantidad = (int.Parse(dtID.Rows[0][0].ToString())- int.Parse(row.Cells["qty"].Value.ToString()));
+                int cantidad = (int.Parse(dtID.Rows[0][0].ToString()) - int.Parse(row.Cells["qty"].Value.ToString()));
                 if (cantidad > 0)
                 {
                     using (SQLiteCommand slqc = new SQLiteCommand("UPDATE inventario SET qty = @qty WHERE id = @id", sqlCon))
@@ -320,7 +321,7 @@ namespace GestionInventario
                         sqlCon.Close();
                     };
                 }
-                else 
+                else
                 {
                     debugStatusBar.Text = "No hay existencias disponibles para venta";
                 }
@@ -328,15 +329,15 @@ namespace GestionInventario
             string listId = "";
             string pricesStr = "";
             string qtyStr = "";
-            foreach (var idString in iditemList) 
+            foreach (var idString in iditemList)
             {
                 listId = idString + " ";
             }
-            foreach (var pricesString in priceitemList) 
+            foreach (var pricesString in priceitemList)
             {
                 pricesStr = pricesString + " ";
             }
-            foreach (var qtyString in qtyitemList) 
+            foreach (var qtyString in qtyitemList)
             {
                 qtyStr = qtyString + " ";
             }
@@ -345,22 +346,25 @@ namespace GestionInventario
                 using (SQLiteCommand sqlc = new SQLiteCommand("INSERT INTO sales(date,client,items,unit_p,qty,discount,coment) values(@date,@client,@items,@unit_p,@qty,@discount,@coment)", sqlCon))
                 {
                     sqlc.Parameters.Add(new SQLiteParameter("@date") { Value = DateTime.Now });
-                    sqlc.Parameters.Add(new SQLiteParameter("@client") { Value = "Mostrador" });
+                    sqlc.Parameters.Add(new SQLiteParameter("@client") { Value = clienTextBox.Text });
                     sqlc.Parameters.Add(new SQLiteParameter("@items") { Value = listId });
                     sqlc.Parameters.Add(new SQLiteParameter("@unit_p") { Value = pricesStr });
                     sqlc.Parameters.Add(new SQLiteParameter("@qty") { Value = qtyStr });
                     sqlc.Parameters.Add(new SQLiteParameter("@discount") { Value = disccountBox.Text });
-                    sqlc.Parameters.Add(new SQLiteParameter("@coment") { Value = "Coment" });
+                    sqlc.Parameters.Add(new SQLiteParameter("@coment") { Value = comentBox.Text });
                     sqlCon.Open();
                     sqlc.ExecuteNonQuery();
                     sqlCon.Close();
 
                 };
             }
-            catch (Exception x) 
+            catch (Exception x)
             {
                 MessageBox.Show(x.ToString());
             }
+            shopList.Rows.Clear();
+            clienTextBox.Text = "Mostrador";
+            comentBox.Text = null;
         }
 
         private void viewSales_Click(object sender, EventArgs e)
