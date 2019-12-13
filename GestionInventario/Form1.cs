@@ -234,9 +234,10 @@ namespace GestionInventario
                         sqlCon.Close();
                         int rowCount = shopList.Rows.Add();
                         DataGridViewRow newRow = shopList.Rows[rowCount];
-                        newRow.Cells[0].Value = dT.Rows[0]["name"].ToString();
-                        newRow.Cells[1].Value = "1";
-                        newRow.Cells[2].Value = dT.Rows[0]["price"].ToString();
+                        newRow.Cells["id"].Value = dT.Rows[0]["id"].ToString();
+                        newRow.Cells["articulo"].Value = dT.Rows[0]["name"].ToString();
+                        newRow.Cells["qty"].Value = "1";
+                        newRow.Cells["price"].Value = dT.Rows[0]["price"].ToString();
                     } 
                 }
             }
@@ -292,6 +293,74 @@ namespace GestionInventario
                 TotalBox.Text = (subtotalValue - totalDiscount).ToString();
             }
             catch { }
+        }
+
+        private void cashButton_Click(object sender, EventArgs e)
+        {
+            var iditemList = new List<string>();
+            var priceitemList = new List<string>();
+            var qtyitemList = new List<string>();
+            foreach (DataGridViewRow row in shopList.Rows)
+            {
+                iditemList.Add(row.Cells["id"].Value.ToString());
+                priceitemList.Add(row.Cells["price"].Value.ToString());
+                qtyitemList.Add(row.Cells["qty"].Value.ToString());
+                SQLiteDataAdapter sqlDadp = new SQLiteDataAdapter("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value , sqlCon);
+                DataTable dtID = new DataTable();
+                sqlDadp.Fill(dtID);
+                int cantidad = (int.Parse(dtID.Rows[0][0].ToString())- int.Parse(row.Cells["qty"].Value.ToString()));
+                if (cantidad > 0)
+                {
+                    using (SQLiteCommand slqc = new SQLiteCommand("UPDATE inventario SET qty = @qty WHERE id = @id", sqlCon))
+                    {
+                        sqlCon.Open();
+                        slqc.Parameters.Add(new SQLiteParameter("@id") { Value = row.Cells["id"].Value });
+                        slqc.Parameters.Add(new SQLiteParameter("@qty") { Value = cantidad });
+                        slqc.ExecuteNonQuery();
+                        sqlCon.Close();
+                    };
+                }
+                else 
+                {
+                    debugStatusBar.Text = "No hay existencias disponibles para venta";
+                }
+            }
+            string listId = "";
+            string pricesStr = "";
+            string qtyStr = "";
+            foreach (var idString in iditemList) 
+            {
+                listId = idString + " ";
+            }
+            foreach (var pricesString in priceitemList) 
+            {
+                pricesStr = pricesString + " ";
+            }
+            foreach (var qtyString in qtyitemList) 
+            {
+                qtyStr = qtyString + " ";
+            }
+            try
+            {
+                using (SQLiteCommand sqlc = new SQLiteCommand("INSERT INTO sales(date,client,items,unit_p,qty,discount,coment) values(@date,@client,@items,@unit_p,@qty,@discount,@coment)", sqlCon))
+                {
+                    sqlc.Parameters.Add(new SQLiteParameter("@date") { Value = DateTime.Now });
+                    sqlc.Parameters.Add(new SQLiteParameter("@client") { Value = "Mostrador" });
+                    sqlc.Parameters.Add(new SQLiteParameter("@items") { Value = listId });
+                    sqlc.Parameters.Add(new SQLiteParameter("@unit_p") { Value = pricesStr });
+                    sqlc.Parameters.Add(new SQLiteParameter("@qty") { Value = qtyStr });
+                    sqlc.Parameters.Add(new SQLiteParameter("@discount") { Value = disccountBox.Text });
+                    sqlc.Parameters.Add(new SQLiteParameter("@coment") { Value = "Coment" });
+                    sqlCon.Open();
+                    sqlc.ExecuteNonQuery();
+                    sqlCon.Close();
+
+                };
+            }
+            catch (Exception x) 
+            {
+                MessageBox.Show(x.ToString());
+            }
         }
     }
 }

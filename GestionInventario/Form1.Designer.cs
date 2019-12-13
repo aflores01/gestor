@@ -48,10 +48,6 @@
             this.subTotalBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.shopList = new System.Windows.Forms.DataGridView();
-            this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchItemButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +59,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.totalCashLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -229,6 +230,7 @@
             this.cashButton.Size = new System.Drawing.Size(150, 100);
             this.cashButton.TabIndex = 10;
             this.cashButton.UseVisualStyleBackColor = true;
+            this.cashButton.Click += new System.EventHandler(this.cashButton_Click);
             // 
             // TotalBox
             // 
@@ -306,6 +308,7 @@
             this.shopList.BackgroundColor = System.Drawing.SystemColors.Window;
             this.shopList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shopList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.articulo,
             this.qty,
             this.price,
@@ -315,30 +318,6 @@
             this.shopList.Size = new System.Drawing.Size(935, 303);
             this.shopList.TabIndex = 3;
             this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopList_CellValueChanged);
-            // 
-            // articulo
-            // 
-            this.articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.articulo.HeaderText = "Descripción";
-            this.articulo.Name = "articulo";
-            this.articulo.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Cantidad";
-            this.qty.Name = "qty";
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Precio";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // totalQty
-            // 
-            this.totalQty.HeaderText = "Total";
-            this.totalQty.Name = "totalQty";
-            this.totalQty.ReadOnly = true;
             // 
             // searchItemButton
             // 
@@ -460,6 +439,37 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "CAJA TOTAL SOLUCIONES";
             // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // articulo
+            // 
+            this.articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.articulo.HeaderText = "Descripción";
+            this.articulo.Name = "articulo";
+            this.articulo.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.HeaderText = "Cantidad";
+            this.qty.Name = "qty";
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Precio";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // totalQty
+            // 
+            this.totalQty.HeaderText = "Total";
+            this.totalQty.Name = "totalQty";
+            this.totalQty.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,6 +534,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label adeudCashLabel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
