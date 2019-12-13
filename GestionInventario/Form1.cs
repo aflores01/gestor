@@ -163,7 +163,7 @@ namespace GestionInventario
                 string selectedBD = tabPage2.Text;
                 Form bdeditForm = new bdeditForm(selectedBD);
                 bdeditForm.Tag = iD;
-                if (bdeditForm.ShowDialog() == DialogResult.OK || bdeditForm.ShowDialog() == DialogResult.Cancel)
+                if (bdeditForm.ShowDialog() == DialogResult.OK)
                 {
                     loadDB();
                     loadDB2();
@@ -277,6 +277,10 @@ namespace GestionInventario
                 }
                 int subtotalValue = int.Parse(subTotalBox.Text);
                 int totalDiscount = int.Parse(disccountBox.Text);
+                if (disccountBox.Text == null)
+                {
+                    totalDiscount = 0;
+                }
                 TotalBox.Text = (subtotalValue - totalDiscount).ToString();
             }
             catch
@@ -368,8 +372,9 @@ namespace GestionInventario
         }
 
         private void viewSales_Click(object sender, EventArgs e)
-        { 
-
+        {
+            Form saleReceips = new saleReceips();
+            saleReceips.ShowDialog();
         }
     }
 }

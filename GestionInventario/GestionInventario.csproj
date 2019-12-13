@@ -134,6 +134,12 @@
     <Compile Include="qtyEdit.Designer.cs">
       <DependentUpon>qtyEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="saleReceips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="saleReceips.Designer.cs">
+      <DependentUpon>saleReceips.cs</DependentUpon>
+    </Compile>
     <Compile Include="searchResultsPOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
     </Content>
     <EmbeddedResource Include="qtyEdit.resx">
       <DependentUpon>qtyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="saleReceips.resx">
+      <DependentUpon>saleReceips.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="searchResultsPOS.resx">
       <DependentUpon>searchResultsPOS.cs</DependentUpon>
