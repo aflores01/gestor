@@ -362,5 +362,10 @@ namespace GestionInventario
                 MessageBox.Show(x.ToString());
             }
         }
+
+        private void viewSales_Click(object sender, EventArgs e)
+        { 
+
+        }
     }
 }
