@@ -66,8 +66,10 @@ namespace GestionInventario
                         sqlCon.Open();
                         insertData.ExecuteNonQuery();
                         sqlCon.Close();
-                        ticketClass tick = new ticketClass();
-                        tick.PrintTicket(inputCliente.Text,inputTelefono.Text,inputEquipo.Text,inputFalla.Text,inputCost.Text,inputComent.Text);
+                        if (baseSelected == "local") {
+                            ticketClass tick = new ticketClass();
+                            tick.PrintTicket(inputCliente.Text, inputTelefono.Text, inputEquipo.Text, inputFalla.Text, inputCost.Text, inputComent.Text); 
+                        }
                     };
                 }
                 catch (Exception r)
