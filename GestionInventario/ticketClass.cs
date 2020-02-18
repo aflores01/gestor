@@ -43,7 +43,7 @@ namespace GestionInventario
             recibo.AddFooterLine("");
             recibo.AddFooterLine("SÓLO SE ENTREGA EQUIPO");
             recibo.AddFooterLine("   CON ESTE TICKET");
-            recibo.PrintTicket("Enviar a OneNote 16");
+            recibo.PrintTicket("POSTicket");
         }
 
         public void PrintCopyTicket(string cliente, string telefono, string equipo, string falla, string cost, string coment, string fecha)
@@ -80,7 +80,7 @@ namespace GestionInventario
             recibo.AddFooterLine("");
             recibo.AddFooterLine("SÓLO SE ENTREGA EQUIPO");
             recibo.AddFooterLine("   CON ESTE TICKET");
-            recibo.PrintTicket("Enviar a OneNote 16");
+            recibo.PrintTicket("POSTicket");
         }
     }
 }
