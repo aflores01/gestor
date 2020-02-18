@@ -65,6 +65,7 @@
             this.searchReceip.TabIndex = 2;
             this.searchReceip.Text = "Buscar";
             this.searchReceip.UseVisualStyleBackColor = true;
+            this.searchReceip.Click += new System.EventHandler(this.searchReceip_Click);
             // 
             // receipsGridView
             // 
