@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.SqlClient;
+using System.IO;
+using OpenHtmlToPdf;
+using System.Diagnostics;
 
 namespace GestionInventario
 {
@@ -33,19 +36,17 @@ namespace GestionInventario
             {
                 dataBase = "equipos";
                 Form newReg = new newReg(dataBase);
-                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                if (newReg.ShowDialog() == DialogResult.OK)
                 {
                     loadDB();
-                    loadDB2();
                 }
             }
             else if (tabControl1.SelectedTab == tabPage2)
             {
                 dataBase = "local";
                 Form newReg = new newReg(dataBase);
-                if (newReg.ShowDialog() == DialogResult.OK || newReg.ShowDialog() == DialogResult.Cancel)
+                if (newReg.ShowDialog() == DialogResult.OK)
                 {
-                    loadDB();
                     loadDB2();
                 }
             }
@@ -143,6 +144,19 @@ namespace GestionInventario
                 }
                 dataGridtab2.CellClick += DataGridtab2_CellClick;
                 //end 
+                DataGridViewButtonColumn pdfB = new DataGridViewButtonColumn
+                {
+                    Name = "receip",
+                    Text = "Imprimir",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Imprimir Nota"
+                };
+                int index = dataGridtab2.Columns.Count;
+                if (dataGridtab2.Columns["receip"] == null) 
+                {
+                    dataGridtab2.Columns.Insert(1, pdfB);
+                }
+                dataGridtab2.CellClick += DataGridtab2_CellClick1;
             }
             catch (Exception)
             {
@@ -151,6 +165,24 @@ namespace GestionInventario
             finally
             {
                 sqlCon.Close();
+            }
+        }
+
+        private void DataGridtab2_CellClick1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridtab2.Columns["receip"].Index) 
+            {
+                DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
+                ticketClass ticketImp = new ticketClass();
+                ticketImp.PrintCopyTicket(
+                    rowNumber.Cells["cliente"].Value.ToString(),
+                    rowNumber.Cells["telefono"].Value.ToString(),
+                    rowNumber.Cells["modelo"].Value.ToString(),
+                    rowNumber.Cells["reparacion"].Value.ToString(),
+                    rowNumber.Cells["costo"].Value.ToString(),
+                    rowNumber.Cells["coment"].Value.ToString(),
+                    rowNumber.Cells["fecha"].Value.ToString()
+                    );
             }
         }
 
@@ -183,7 +215,6 @@ namespace GestionInventario
                 if (bdeditForm.ShowDialog() == DialogResult.OK) 
                 {
                     loadDB();
-                    loadDB2();
                 }
             }
             if (e.ColumnIndex == dataGridView1.Columns["Borrar"].Index) 
@@ -202,7 +233,6 @@ namespace GestionInventario
                         sqlCon.Close();
                     };
                     loadDB();
-                    loadDB2();
                 }
             }
         }
@@ -256,7 +286,6 @@ namespace GestionInventario
             if (newIncoming.ShowDialog() == DialogResult.OK)
             {
                 loadDB();
-                loadDB2();
             }
         }
 
@@ -368,6 +397,8 @@ namespace GestionInventario
             }
             shopList.Rows.Clear();
             clienTextBox.Text = "Mostrador";
+            subTotalBox.Text = "";
+            TotalBox.Text = "";
             comentBox.Text = null;
         }
 

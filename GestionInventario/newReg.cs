@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibPrintTicket;
+using Microsoft.PointOfService;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,7 +58,7 @@ namespace GestionInventario
                     {
                         insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
                         insertData.Parameters.Add(new SQLiteParameter("@cliente") { Value = inputCliente.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@fecha") { Value = inputFecha.Value.Date });
+                        insertData.Parameters.Add(new SQLiteParameter("@fecha") { Value = DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() });
                         insertData.Parameters.Add(new SQLiteParameter("@telefono") { Value = inputTelefono.Text });
                         insertData.Parameters.Add(new SQLiteParameter("@reparacion") { Value = inputFalla.Text });
                         insertData.Parameters.Add(new SQLiteParameter("@costo") { Value = inputCost.Text });
@@ -64,6 +66,9 @@ namespace GestionInventario
                         sqlCon.Open();
                         insertData.ExecuteNonQuery();
                         sqlCon.Close();
+
+                        ticketClass tick = new ticketClass();
+                        tick.PrintTicket(inputCliente.Text,inputTelefono.Text,inputEquipo.Text,inputFalla.Text,inputCost.Text,inputComent.Text);
                     };
                 }
                 catch (Exception r)

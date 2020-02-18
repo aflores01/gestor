@@ -67,16 +67,15 @@ namespace GestionInventario
 
         private void ReceipsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            const string html = "<!DOCTYPE html>" +
-            "<html>" +
-            "<head><meta charset='UTF-8'><title>Title</title></head>" +
-            "<body>Body text...</body>" +
-            "</html>";
-            var pdf = Pdf.From(html).Content();
+            StreamReader sR = new StreamReader("resources/receip.html");
+            string html = sR.ReadToEnd();
+            //html.Replace("", "");
+            var pdf = Pdf.From(html+html).Content();
             FileStream fs = new FileStream(ruta + "/data.pdf", FileMode.Create,FileAccess.Write);
             fs.Write(pdf, 0, pdf.Length);
             fs.Close();
             Process.Start(ruta + "/data.pdf");
+            sR.Close();
         }
     }
 }
