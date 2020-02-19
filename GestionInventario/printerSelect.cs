@@ -35,6 +35,7 @@ namespace GestionInventario
                 Properties.Settings.Default.printer = printerList.SelectedItem.ToString();
                 Properties.Settings.Default.Save();
                 this.Close();
+
             }
         }
     }
