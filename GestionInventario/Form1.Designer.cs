@@ -42,7 +42,6 @@
             this.viewSales = new System.Windows.Forms.Button();
             this.showEx = new System.Windows.Forms.Button();
             this.addInvReg = new System.Windows.Forms.Button();
-            this.cashButton = new System.Windows.Forms.Button();
             this.TotalBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.disccountBox = new System.Windows.Forms.TextBox();
@@ -51,6 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.shopList = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sku = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +72,12 @@
             this.totalCashLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.impresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -82,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridtab2)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -137,11 +144,11 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(16, 13);
+            this.tabControl1.Location = new System.Drawing.Point(16, 28);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1265, 709);
+            this.tabControl1.Size = new System.Drawing.Size(1265, 694);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage3
@@ -161,7 +168,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage3.Size = new System.Drawing.Size(1257, 665);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Venta";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -177,7 +184,7 @@
             this.panel1.Controls.Add(this.viewSales);
             this.panel1.Controls.Add(this.showEx);
             this.panel1.Controls.Add(this.addInvReg);
-            this.panel1.Location = new System.Drawing.Point(12, 536);
+            this.panel1.Location = new System.Drawing.Point(12, 521);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(687, 138);
@@ -264,25 +271,11 @@
             this.addInvReg.UseVisualStyleBackColor = true;
             this.addInvReg.Click += new System.EventHandler(this.addInvReg_Click);
             // 
-            // cashButton
-            // 
-            this.cashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cashButton.BackgroundImage = global::GestionInventario.Properties.Resources.checkout;
-            this.cashButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cashButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cashButton.Location = new System.Drawing.Point(1051, 536);
-            this.cashButton.Margin = new System.Windows.Forms.Padding(4);
-            this.cashButton.Name = "cashButton";
-            this.cashButton.Size = new System.Drawing.Size(200, 123);
-            this.cashButton.TabIndex = 10;
-            this.cashButton.UseVisualStyleBackColor = true;
-            this.cashButton.Click += new System.EventHandler(this.cashButton_Click);
-            // 
             // TotalBox
             // 
             this.TotalBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalBox.Location = new System.Drawing.Point(856, 624);
+            this.TotalBox.Location = new System.Drawing.Point(856, 609);
             this.TotalBox.Margin = new System.Windows.Forms.Padding(4);
             this.TotalBox.Name = "TotalBox";
             this.TotalBox.ReadOnly = true;
@@ -295,7 +288,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(773, 628);
+            this.label4.Location = new System.Drawing.Point(773, 613);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 29);
@@ -306,7 +299,7 @@
             // 
             this.disccountBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.disccountBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.disccountBox.Location = new System.Drawing.Point(856, 580);
+            this.disccountBox.Location = new System.Drawing.Point(856, 565);
             this.disccountBox.Margin = new System.Windows.Forms.Padding(4);
             this.disccountBox.Name = "disccountBox";
             this.disccountBox.Size = new System.Drawing.Size(185, 36);
@@ -320,7 +313,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(707, 584);
+            this.label3.Location = new System.Drawing.Point(707, 569);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 29);
@@ -331,7 +324,7 @@
             // 
             this.subTotalBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.subTotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.subTotalBox.Location = new System.Drawing.Point(856, 536);
+            this.subTotalBox.Location = new System.Drawing.Point(856, 521);
             this.subTotalBox.Margin = new System.Windows.Forms.Padding(4);
             this.subTotalBox.Name = "subTotalBox";
             this.subTotalBox.ReadOnly = true;
@@ -344,7 +337,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(736, 539);
+            this.label2.Location = new System.Drawing.Point(736, 524);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 29);
@@ -361,6 +354,7 @@
             this.shopList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shopList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.sku,
             this.articulo,
             this.qty,
             this.price,
@@ -369,7 +363,7 @@
             this.shopList.Margin = new System.Windows.Forms.Padding(4);
             this.shopList.Name = "shopList";
             this.shopList.RowHeadersWidth = 51;
-            this.shopList.Size = new System.Drawing.Size(1247, 479);
+            this.shopList.Size = new System.Drawing.Size(1247, 464);
             this.shopList.TabIndex = 3;
             this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopList_CellValueChanged);
             // 
@@ -381,6 +375,13 @@
             this.id.ReadOnly = true;
             this.id.Visible = false;
             this.id.Width = 125;
+            // 
+            // sku
+            // 
+            this.sku.HeaderText = "SKU";
+            this.sku.MinimumWidth = 6;
+            this.sku.Name = "sku";
+            this.sku.Width = 125;
             // 
             // articulo
             // 
@@ -458,7 +459,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage2.Size = new System.Drawing.Size(1257, 665);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "DK Laboratorio Celular";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -518,7 +519,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage1.Size = new System.Drawing.Size(1257, 665);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Soluciones Informaticas";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -628,6 +629,60 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.reportesToolStripMenuItem,
+            this.configuraciónToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1297, 28);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // configuraciónToolStripMenuItem
+            // 
+            this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.impresoraToolStripMenuItem});
+            this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
+            this.configuraciónToolStripMenuItem.Text = "Configuración";
+            // 
+            // impresoraToolStripMenuItem
+            // 
+            this.impresoraToolStripMenuItem.Name = "impresoraToolStripMenuItem";
+            this.impresoraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.impresoraToolStripMenuItem.Text = "Impresora";
+            this.impresoraToolStripMenuItem.Click += new System.EventHandler(this.impresoraToolStripMenuItem_Click);
+            // 
+            // cashButton
+            // 
+            this.cashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cashButton.BackgroundImage = global::GestionInventario.Properties.Resources.checkout;
+            this.cashButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.cashButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashButton.Location = new System.Drawing.Point(1051, 521);
+            this.cashButton.Margin = new System.Windows.Forms.Padding(4);
+            this.cashButton.Name = "cashButton";
+            this.cashButton.Size = new System.Drawing.Size(200, 123);
+            this.cashButton.TabIndex = 10;
+            this.cashButton.UseVisualStyleBackColor = true;
+            this.cashButton.Click += new System.EventHandler(this.cashButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -635,6 +690,7 @@
             this.ClientSize = new System.Drawing.Size(1297, 753);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Inventarios & venta";
@@ -653,6 +709,8 @@
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -691,11 +749,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label adeudCashLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
         private System.Windows.Forms.Button viewSales;
         private System.Windows.Forms.TextBox comentBox;
         private System.Windows.Forms.TextBox clienTextBox;
@@ -704,6 +757,17 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox searchBoxInv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sku;
+        private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem impresoraToolStripMenuItem;
     }
 }
 

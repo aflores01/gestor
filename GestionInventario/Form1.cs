@@ -265,6 +265,7 @@ namespace GestionInventario
                         int rowCount = shopList.Rows.Add();
                         DataGridViewRow newRow = shopList.Rows[rowCount];
                         newRow.Cells["id"].Value = dT.Rows[0]["id"].ToString();
+                        newRow.Cells["sku"].Value = dT.Rows[0]["sku"].ToString();
                         newRow.Cells["articulo"].Value = dT.Rows[0]["name"].ToString();
                         newRow.Cells["qty"].Value = "1";
                         newRow.Cells["price"].Value = dT.Rows[0]["price"].ToString();
@@ -296,6 +297,7 @@ namespace GestionInventario
                 DataGridViewRow updateRow = shopList.CurrentRow;
                 int valor1 = int.Parse(updateRow.Cells["qty"].Value.ToString());
                 int valor2 = int.Parse(updateRow.Cells["price"].Value.ToString());
+
                 updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString() ;
                 int suma = 0;
                 foreach (DataGridViewRow row in shopList.Rows) 
@@ -406,6 +408,12 @@ namespace GestionInventario
         {
             Form saleReceips = new saleReceips();
             saleReceips.ShowDialog();
+        }
+
+        private void impresoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printerSelect pt = new printerSelect();
+            pt.Show();
         }
     }
 }
