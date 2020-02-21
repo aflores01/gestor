@@ -49,7 +49,7 @@
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(17, 459);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(499, 63);
             this.button1.TabIndex = 1;
@@ -74,7 +74,7 @@
             // 
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(17, 16);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(497, 435);
             this.listView1.TabIndex = 0;
@@ -82,8 +82,9 @@
             // 
             // inputEquipo
             // 
+            this.inputEquipo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputEquipo.Location = new System.Drawing.Point(35, 62);
-            this.inputEquipo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputEquipo.Margin = new System.Windows.Forms.Padding(4);
             this.inputEquipo.Name = "inputEquipo";
             this.inputEquipo.Size = new System.Drawing.Size(461, 22);
             this.inputEquipo.TabIndex = 3;
@@ -101,8 +102,9 @@
             // 
             // inputCliente
             // 
+            this.inputCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputCliente.Location = new System.Drawing.Point(35, 130);
-            this.inputCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputCliente.Margin = new System.Windows.Forms.Padding(4);
             this.inputCliente.Name = "inputCliente";
             this.inputCliente.Size = new System.Drawing.Size(461, 22);
             this.inputCliente.TabIndex = 5;
@@ -120,8 +122,9 @@
             // 
             // inputTelefono
             // 
+            this.inputTelefono.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputTelefono.Location = new System.Drawing.Point(35, 200);
-            this.inputTelefono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputTelefono.Margin = new System.Windows.Forms.Padding(4);
             this.inputTelefono.Name = "inputTelefono";
             this.inputTelefono.Size = new System.Drawing.Size(461, 22);
             this.inputTelefono.TabIndex = 9;
@@ -139,8 +142,9 @@
             // 
             // inputFalla
             // 
+            this.inputFalla.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputFalla.Location = new System.Drawing.Point(35, 273);
-            this.inputFalla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputFalla.Margin = new System.Windows.Forms.Padding(4);
             this.inputFalla.Name = "inputFalla";
             this.inputFalla.Size = new System.Drawing.Size(461, 22);
             this.inputFalla.TabIndex = 11;
@@ -158,8 +162,9 @@
             // 
             // inputCost
             // 
+            this.inputCost.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputCost.Location = new System.Drawing.Point(35, 342);
-            this.inputCost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputCost.Margin = new System.Windows.Forms.Padding(4);
             this.inputCost.Name = "inputCost";
             this.inputCost.Size = new System.Drawing.Size(461, 22);
             this.inputCost.TabIndex = 13;
@@ -177,8 +182,9 @@
             // 
             // inputComent
             // 
+            this.inputComent.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.inputComent.Location = new System.Drawing.Point(35, 410);
-            this.inputComent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputComent.Margin = new System.Windows.Forms.Padding(4);
             this.inputComent.Name = "inputComent";
             this.inputComent.Size = new System.Drawing.Size(461, 22);
             this.inputComent.TabIndex = 15;
@@ -202,7 +208,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "newReg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
