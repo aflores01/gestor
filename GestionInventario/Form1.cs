@@ -17,8 +17,11 @@ namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
-        SQLiteConnection sqlCon = new SQLiteConnection(urI);
+        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db"; 
+
+    
+       
+SQLiteConnection sqlCon = new SQLiteConnection(urI);
         
         public Form1()
         {
@@ -414,6 +417,31 @@ namespace GestionInventario
         {
             printerSelect pt = new printerSelect();
             pt.Show();
+        }
+
+        private void backupDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db"))
+                {
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
+                }
+                else
+                {
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "data.db", AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
+                }
+                debugStatusBar.Text = "Copia de seguridad creada correctamente.";
+            }
+            catch 
+            {
+                debugStatusBar.Text = "Error al realizar la copia de seguridad.";
+            }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
