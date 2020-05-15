@@ -18,10 +18,7 @@ namespace GestionInventario
     public partial class Form1 : Form
     {
         static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db"; 
-
-    
-       
-SQLiteConnection sqlCon = new SQLiteConnection(urI);
+        SQLiteConnection sqlCon = new SQLiteConnection(urI);
         
         public Form1()
         {
@@ -128,10 +125,22 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
             try
             {
                 sqlCon.Open();
-                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM local", sqlCon);
+                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM local WHERE entregado IS NULL", sqlCon);
                 DataTable dT = new DataTable();
                 adpt.Fill(dT);
                 dataGridtab2.DataSource = dT;
+                DataGridViewButtonColumn collected = new DataGridViewButtonColumn
+                {
+                    Name = "Entregar",
+                    Text = "Entregar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Recolección"
+                };
+                int columnCount = dT.Columns.Count;
+                if (dataGridtab2.Columns["Entregar"] == null)
+                {
+                    dataGridtab2.Columns.Insert(columnCount, collected);
+                }
                 //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
@@ -145,7 +154,6 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
                 {
                     dataGridtab2.Columns.Insert(columnIndex, editarButton);
                 }
-                dataGridtab2.CellClick += DataGridtab2_CellClick;
                 //end 
                 DataGridViewButtonColumn pdfB = new DataGridViewButtonColumn
                 {
@@ -159,7 +167,7 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
                 {
                     dataGridtab2.Columns.Insert(1, pdfB);
                 }
-                dataGridtab2.CellClick += DataGridtab2_CellClick1;
+                dataGridtab2.CellClick += DataGridtab2_CellClick;
             }
             catch (Exception)
             {
@@ -171,9 +179,9 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
             }
         }
 
-        private void DataGridtab2_CellClick1(object sender, DataGridViewCellEventArgs e)
+        private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridtab2.Columns["receip"].Index) 
+            if (e.ColumnIndex == dataGridtab2.Columns["receip"].Index)
             {
                 DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
                 ticketClass ticketImp = new ticketClass();
@@ -187,11 +195,7 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
                     rowNumber.Cells["fecha"].Value.ToString()
                     );
             }
-        }
-
-        private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
+            else if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
             {
                 DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
                 string iD = rowNumber.Cells["id"].Value.ToString();
@@ -203,6 +207,18 @@ SQLiteConnection sqlCon = new SQLiteConnection(urI);
                     loadDB();
                     loadDB2();
                 }
+            }
+            else if (e.ColumnIndex == dataGridtab2.Columns["Entregar"].Index) 
+            {
+                try
+                {
+                    DataGridViewRow rowValue = dataGridtab2.Rows[e.RowIndex];
+                    string id = rowValue.Cells["id"].Value.ToString();
+                    var new_query = new update_query();
+                    new_query.updateDb("entregado", "local", "true", id);
+                    loadDB2();
+                }
+                catch { }
             }
         }
 
