@@ -139,7 +139,7 @@ namespace GestionInventario
                 int columnCount = dT.Columns.Count;
                 if (dataGridtab2.Columns["Entregar"] == null)
                 {
-                    dataGridtab2.Columns.Insert(columnCount, collected);
+                    dataGridtab2.Columns.Insert(0, collected);
                 }
                 //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
