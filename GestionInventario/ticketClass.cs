@@ -16,7 +16,7 @@ namespace GestionInventario
             recibo.AddSubHeaderLine("");
             recibo.AddHeaderLine("LUN - SAB 9:30 - 19:00");
             recibo.AddHeaderLine("AV MEXICO 111, DOS RIOS");
-            recibo.AddHeaderLine("HUOXQUIUCAN MÉXICO 52790");
+            recibo.AddHeaderLine("HUIXQUILUCAN MÉXICO 52790");
             recibo.AddHeaderLine("55 8284 2550");
             recibo.AddSubHeaderLine("");
             recibo.AddSubHeaderLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString());
@@ -43,7 +43,14 @@ namespace GestionInventario
             recibo.AddFooterLine("");
             recibo.AddFooterLine("SÓLO SE ENTREGA EQUIPO");
             recibo.AddFooterLine("   CON ESTE TICKET");
-            recibo.PrintTicket("POSTicket");
+            if (Properties.Settings.Default.printer == "null")
+            {
+
+            }
+            else 
+            {
+                recibo.PrintTicket(Properties.Settings.Default.printer);
+            }
         }
 
         public void PrintCopyTicket(string cliente, string telefono, string equipo, string falla, string cost, string coment, string fecha)
@@ -80,7 +87,14 @@ namespace GestionInventario
             recibo.AddFooterLine("");
             recibo.AddFooterLine("SÓLO SE ENTREGA EQUIPO");
             recibo.AddFooterLine("   CON ESTE TICKET");
-            recibo.PrintTicket("POSTicket");
+            if (Properties.Settings.Default.printer == "null")
+            {
+
+            }
+            else
+            {
+                recibo.PrintTicket(Properties.Settings.Default.printer);
+            }
         }
     }
 }

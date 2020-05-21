@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.shopList = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sku = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +60,7 @@
             this.searchBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
+            this.searchBtn = new System.Windows.Forms.Button();
             this.searchBoxInv = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridtab2 = new System.Windows.Forms.DataGridView();
@@ -72,6 +73,14 @@
             this.totalCashLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.impresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -82,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridtab2)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -92,7 +102,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 727);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1297, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1507, 26);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "Debug Log";
             // 
@@ -115,7 +125,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(1255, 631);
+            this.dataGridView1.Size = new System.Drawing.Size(1459, 615);
             this.dataGridView1.TabIndex = 1;
             // 
             // newRegButton
@@ -137,11 +147,11 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(16, 13);
+            this.tabControl1.Location = new System.Drawing.Point(16, 28);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1265, 709);
+            this.tabControl1.Size = new System.Drawing.Size(1475, 694);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage3
@@ -161,7 +171,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage3.Size = new System.Drawing.Size(1467, 665);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Venta";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -177,7 +187,7 @@
             this.panel1.Controls.Add(this.viewSales);
             this.panel1.Controls.Add(this.showEx);
             this.panel1.Controls.Add(this.addInvReg);
-            this.panel1.Location = new System.Drawing.Point(12, 536);
+            this.panel1.Location = new System.Drawing.Point(12, 521);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(687, 138);
@@ -209,6 +219,7 @@
             // 
             this.comentBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.comentBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.comentBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comentBox.Location = new System.Drawing.Point(281, 57);
             this.comentBox.Margin = new System.Windows.Forms.Padding(4);
@@ -270,7 +281,7 @@
             this.cashButton.BackgroundImage = global::GestionInventario.Properties.Resources.checkout;
             this.cashButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cashButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cashButton.Location = new System.Drawing.Point(1051, 536);
+            this.cashButton.Location = new System.Drawing.Point(1051, 521);
             this.cashButton.Margin = new System.Windows.Forms.Padding(4);
             this.cashButton.Name = "cashButton";
             this.cashButton.Size = new System.Drawing.Size(200, 123);
@@ -282,7 +293,7 @@
             // 
             this.TotalBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalBox.Location = new System.Drawing.Point(856, 624);
+            this.TotalBox.Location = new System.Drawing.Point(856, 609);
             this.TotalBox.Margin = new System.Windows.Forms.Padding(4);
             this.TotalBox.Name = "TotalBox";
             this.TotalBox.ReadOnly = true;
@@ -295,7 +306,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(773, 628);
+            this.label4.Location = new System.Drawing.Point(773, 613);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 29);
@@ -306,7 +317,7 @@
             // 
             this.disccountBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.disccountBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.disccountBox.Location = new System.Drawing.Point(856, 580);
+            this.disccountBox.Location = new System.Drawing.Point(856, 565);
             this.disccountBox.Margin = new System.Windows.Forms.Padding(4);
             this.disccountBox.Name = "disccountBox";
             this.disccountBox.Size = new System.Drawing.Size(185, 36);
@@ -320,7 +331,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(707, 584);
+            this.label3.Location = new System.Drawing.Point(707, 569);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 29);
@@ -331,7 +342,7 @@
             // 
             this.subTotalBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.subTotalBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.subTotalBox.Location = new System.Drawing.Point(856, 536);
+            this.subTotalBox.Location = new System.Drawing.Point(856, 521);
             this.subTotalBox.Margin = new System.Windows.Forms.Padding(4);
             this.subTotalBox.Name = "subTotalBox";
             this.subTotalBox.ReadOnly = true;
@@ -344,7 +355,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(736, 539);
+            this.label2.Location = new System.Drawing.Point(736, 524);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 29);
@@ -361,6 +372,7 @@
             this.shopList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shopList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.sku,
             this.articulo,
             this.qty,
             this.price,
@@ -369,7 +381,7 @@
             this.shopList.Margin = new System.Windows.Forms.Padding(4);
             this.shopList.Name = "shopList";
             this.shopList.RowHeadersWidth = 51;
-            this.shopList.Size = new System.Drawing.Size(1247, 479);
+            this.shopList.Size = new System.Drawing.Size(1459, 464);
             this.shopList.TabIndex = 3;
             this.shopList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShopList_CellValueChanged);
             // 
@@ -381,6 +393,13 @@
             this.id.ReadOnly = true;
             this.id.Visible = false;
             this.id.Width = 125;
+            // 
+            // sku
+            // 
+            this.sku.HeaderText = "SKU";
+            this.sku.MinimumWidth = 6;
+            this.sku.Name = "sku";
+            this.sku.Width = 125;
             // 
             // articulo
             // 
@@ -417,7 +436,7 @@
             // 
             this.searchItemButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchItemButton.Location = new System.Drawing.Point(1064, 5);
+            this.searchItemButton.Location = new System.Drawing.Point(1276, 5);
             this.searchItemButton.Margin = new System.Windows.Forms.Padding(4);
             this.searchItemButton.Name = "searchItemButton";
             this.searchItemButton.Size = new System.Drawing.Size(187, 37);
@@ -430,11 +449,12 @@
             // 
             this.searchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.searchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchBox.Location = new System.Drawing.Point(133, 5);
             this.searchBox.Margin = new System.Windows.Forms.Padding(4);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(921, 36);
+            this.searchBox.Size = new System.Drawing.Size(1135, 36);
             this.searchBox.TabIndex = 1;
             // 
             // label1
@@ -450,7 +470,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.searchBtn);
             this.tabPage2.Controls.Add(this.searchBoxInv);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.dataGridtab2);
@@ -458,29 +478,27 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage2.Size = new System.Drawing.Size(1467, 665);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "DK Laboratorio Celular";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // searchBtn
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1115, 7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(135, 30);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Buscar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.searchBtn.Location = new System.Drawing.Point(167, 8);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(154, 29);
+            this.searchBtn.TabIndex = 3;
+            this.searchBtn.Text = "Buscar";
+            this.searchBtn.UseVisualStyleBackColor = true;
             // 
             // searchBoxInv
             // 
             this.searchBoxInv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBoxInv.Location = new System.Drawing.Point(167, 11);
+            this.searchBoxInv.Location = new System.Drawing.Point(327, 11);
             this.searchBoxInv.Name = "searchBoxInv";
-            this.searchBoxInv.Size = new System.Drawing.Size(942, 22);
+            this.searchBoxInv.Size = new System.Drawing.Size(1133, 22);
             this.searchBoxInv.TabIndex = 2;
             // 
             // button1
@@ -505,7 +523,7 @@
             this.dataGridtab2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridtab2.Name = "dataGridtab2";
             this.dataGridtab2.RowHeadersWidth = 51;
-            this.dataGridtab2.Size = new System.Drawing.Size(1255, 633);
+            this.dataGridtab2.Size = new System.Drawing.Size(1460, 621);
             this.dataGridtab2.TabIndex = 0;
             // 
             // tabPage1
@@ -518,7 +536,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1257, 680);
+            this.tabPage1.Size = new System.Drawing.Size(1467, 665);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Soluciones Informaticas";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -536,12 +554,11 @@
             this.panel2.Location = new System.Drawing.Point(357, 8);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(892, 30);
+            this.panel2.Size = new System.Drawing.Size(1102, 30);
             this.panel2.TabIndex = 6;
             // 
             // adeudCashLabel
             // 
-            this.adeudCashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.adeudCashLabel.AutoSize = true;
             this.adeudCashLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adeudCashLabel.ForeColor = System.Drawing.Color.Red;
@@ -628,13 +645,78 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.reportesToolStripMenuItem,
+            this.configuraciónToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1507, 28);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupDatabaseToolStripMenuItem,
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // configuraciónToolStripMenuItem
+            // 
+            this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.impresoraToolStripMenuItem,
+            this.usuariosToolStripMenuItem});
+            this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
+            this.configuraciónToolStripMenuItem.Text = "Configuración";
+            // 
+            // impresoraToolStripMenuItem
+            // 
+            this.impresoraToolStripMenuItem.Name = "impresoraToolStripMenuItem";
+            this.impresoraToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.impresoraToolStripMenuItem.Text = "Impresora";
+            this.impresoraToolStripMenuItem.Click += new System.EventHandler(this.impresoraToolStripMenuItem_Click);
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // backupDatabaseToolStripMenuItem
+            // 
+            this.backupDatabaseToolStripMenuItem.Name = "backupDatabaseToolStripMenuItem";
+            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.backupDatabaseToolStripMenuItem.Text = "Backup database";
+            this.backupDatabaseToolStripMenuItem.Click += new System.EventHandler(this.backupDatabaseToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1297, 753);
+            this.ClientSize = new System.Drawing.Size(1507, 753);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Inventarios & venta";
@@ -653,6 +735,8 @@
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -691,19 +775,28 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label adeudCashLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
         private System.Windows.Forms.Button viewSales;
         private System.Windows.Forms.TextBox comentBox;
         private System.Windows.Forms.TextBox clienTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox searchBoxInv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sku;
+        private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalQty;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem impresoraToolStripMenuItem;
+        private System.Windows.Forms.Button searchBtn;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backupDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }
 

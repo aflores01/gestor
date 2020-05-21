@@ -17,7 +17,7 @@ namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db"; 
         SQLiteConnection sqlCon = new SQLiteConnection(urI);
         
         public Form1()
@@ -125,10 +125,22 @@ namespace GestionInventario
             try
             {
                 sqlCon.Open();
-                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM local", sqlCon);
+                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM local WHERE entregado IS NULL", sqlCon);
                 DataTable dT = new DataTable();
                 adpt.Fill(dT);
                 dataGridtab2.DataSource = dT;
+                DataGridViewButtonColumn collected = new DataGridViewButtonColumn
+                {
+                    Name = "Entregar",
+                    Text = "Entregar",
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "Recolección"
+                };
+                int columnCount = dT.Columns.Count;
+                if (dataGridtab2.Columns["Entregar"] == null)
+                {
+                    dataGridtab2.Columns.Insert(0, collected);
+                }
                 //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
@@ -142,7 +154,6 @@ namespace GestionInventario
                 {
                     dataGridtab2.Columns.Insert(columnIndex, editarButton);
                 }
-                dataGridtab2.CellClick += DataGridtab2_CellClick;
                 //end 
                 DataGridViewButtonColumn pdfB = new DataGridViewButtonColumn
                 {
@@ -156,7 +167,7 @@ namespace GestionInventario
                 {
                     dataGridtab2.Columns.Insert(1, pdfB);
                 }
-                dataGridtab2.CellClick += DataGridtab2_CellClick1;
+                dataGridtab2.CellClick += DataGridtab2_CellClick;
             }
             catch (Exception)
             {
@@ -168,9 +179,9 @@ namespace GestionInventario
             }
         }
 
-        private void DataGridtab2_CellClick1(object sender, DataGridViewCellEventArgs e)
+        private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridtab2.Columns["receip"].Index) 
+            if (e.ColumnIndex == dataGridtab2.Columns["receip"].Index)
             {
                 DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
                 ticketClass ticketImp = new ticketClass();
@@ -184,11 +195,7 @@ namespace GestionInventario
                     rowNumber.Cells["fecha"].Value.ToString()
                     );
             }
-        }
-
-        private void DataGridtab2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
+            else if (e.ColumnIndex == dataGridtab2.Columns["Editar"].Index)
             {
                 DataGridViewRow rowNumber = dataGridtab2.Rows[e.RowIndex];
                 string iD = rowNumber.Cells["id"].Value.ToString();
@@ -200,6 +207,18 @@ namespace GestionInventario
                     loadDB();
                     loadDB2();
                 }
+            }
+            else if (e.ColumnIndex == dataGridtab2.Columns["Entregar"].Index) 
+            {
+                try
+                {
+                    DataGridViewRow rowValue = dataGridtab2.Rows[e.RowIndex];
+                    string id = rowValue.Cells["id"].Value.ToString();
+                    var new_query = new update_query();
+                    new_query.updateDb("entregado", "local", "true", id);
+                    loadDB2();
+                }
+                catch { }
             }
         }
 
@@ -265,6 +284,7 @@ namespace GestionInventario
                         int rowCount = shopList.Rows.Add();
                         DataGridViewRow newRow = shopList.Rows[rowCount];
                         newRow.Cells["id"].Value = dT.Rows[0]["id"].ToString();
+                        newRow.Cells["sku"].Value = dT.Rows[0]["sku"].ToString();
                         newRow.Cells["articulo"].Value = dT.Rows[0]["name"].ToString();
                         newRow.Cells["qty"].Value = "1";
                         newRow.Cells["price"].Value = dT.Rows[0]["price"].ToString();
@@ -296,6 +316,7 @@ namespace GestionInventario
                 DataGridViewRow updateRow = shopList.CurrentRow;
                 int valor1 = int.Parse(updateRow.Cells["qty"].Value.ToString());
                 int valor2 = int.Parse(updateRow.Cells["price"].Value.ToString());
+
                 updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString() ;
                 int suma = 0;
                 foreach (DataGridViewRow row in shopList.Rows) 
@@ -406,6 +427,37 @@ namespace GestionInventario
         {
             Form saleReceips = new saleReceips();
             saleReceips.ShowDialog();
+        }
+
+        private void impresoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printerSelect pt = new printerSelect();
+            pt.Show();
+        }
+
+        private void backupDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db"))
+                {
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
+                }
+                else
+                {
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "data.db", AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
+                }
+                debugStatusBar.Text = "Copia de seguridad creada correctamente.";
+            }
+            catch 
+            {
+                debugStatusBar.Text = "Error al realizar la copia de seguridad.";
+            }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
