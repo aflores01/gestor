@@ -1,37 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
-using System.Data.SqlClient;
 using System.IO;
-using OpenHtmlToPdf;
-using System.Diagnostics;
 
 namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db"; 
-        SQLiteConnection sqlCon = new SQLiteConnection(urI);
+        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
+        readonly SQLiteConnection sqlCon = new SQLiteConnection(urI);
         
         public Form1()
         {
             InitializeComponent();
-            loadDB();
-            loadDB2();
-            debugStatusBar.Text = "Conexión a base de datos correcta";
-            DataTable shopTable = new DataTable();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dataBase = "";
+            string dataBase;
             if (tabControl1.SelectedTab == tabPage1)
             {
                 dataBase = "equipos";
@@ -61,27 +49,15 @@ namespace GestionInventario
             dataGridView1.DataSource = null;
             try
             {
-                sqlCon.Open();
-                SQLiteDataAdapter saldoAdpt = new SQLiteDataAdapter("SELECT SUM(costo) FROM equipos", sqlCon);
-                DataTable saldoDT = new DataTable();
-                saldoAdpt.Fill(saldoDT);
-                saldoLabel.Text = "$" + saldoDT.Rows[0][0].ToString();
-                //
-                SQLiteDataAdapter cashAdpt = new SQLiteDataAdapter("SELECT SUM(saldo) FROM equipos", sqlCon);
-                DataTable cashDT = new DataTable();
-                cashAdpt.Fill(cashDT);
-                totalCashLabel.Text = "$" + cashDT.Rows[0][0].ToString();
-                //
-                SQLiteDataAdapter operAdp = new SQLiteDataAdapter("SELECT SUM(costo) - SUM(saldo) FROM equipos", sqlCon);
-                DataTable resultDT = new DataTable();
-                operAdp.Fill(resultDT);
-                adeudCashLabel.Text = "$" + resultDT.Rows[0][0].ToString();
-                //
-                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM equipos", sqlCon);
-                DataTable dT = new DataTable();
-                adpt.Fill(dT);
-                dataGridView1.DataSource = dT;
-                //
+                Db_search dbQuery = new Db_search();
+                DataTable costo = dbQuery.Search_query("SELECT SUM(costo) FROM equipos");
+                saldoLabel.Text = "$" + costo.Rows[0][0].ToString();
+                DataTable saldo = dbQuery.Search_query("SELECT SUM(saldo) FROM equipos");
+                totalCashLabel.Text = "$" + saldo.Rows[0][0].ToString();
+                DataTable totales = dbQuery.Search_query("SELECT SUM(costo) - SUM(saldo) FROM equipos");
+                adeudCashLabel.Text = "$" + totales.Rows[0][0].ToString();
+                DataTable content = dbQuery.Search_query("SELECT * FROM equipos");
+                dataGridView1.DataSource = content;
                 DataGridViewButtonColumn delButn = new DataGridViewButtonColumn 
                 {
                     Name = "Borrar",
@@ -113,10 +89,6 @@ namespace GestionInventario
             {
                 debugStatusBar.Text = "Conexión fallida: " + e.ToString();
             }
-            finally
-            {
-                sqlCon.Close();
-            }
         }
 
         public void loadDB2()
@@ -124,11 +96,9 @@ namespace GestionInventario
             dataGridtab2.DataSource = null;
             try
             {
-                sqlCon.Open();
-                SQLiteDataAdapter adpt = new SQLiteDataAdapter("SELECT * FROM local WHERE entregado IS NULL", sqlCon);
-                DataTable dT = new DataTable();
-                adpt.Fill(dT);
-                dataGridtab2.DataSource = dT;
+                Db_search DBQuery = new Db_search();
+                DataTable dt = DBQuery.Search_query("SELECT * from local where entregado ISNULL ORDER BY id DESC LIMIT 50");
+                dataGridtab2.DataSource = dt;
                 DataGridViewButtonColumn collected = new DataGridViewButtonColumn
                 {
                     Name = "Entregar",
@@ -136,12 +106,11 @@ namespace GestionInventario
                     UseColumnTextForButtonValue = true,
                     HeaderText = "Recolección"
                 };
-                int columnCount = dT.Columns.Count;
+                int columnCount = dt.Columns.Count;
                 if (dataGridtab2.Columns["Entregar"] == null)
                 {
                     dataGridtab2.Columns.Insert(0, collected);
                 }
-                //datagridviewbuttoncolum
                 DataGridViewButtonColumn editarButton = new DataGridViewButtonColumn
                 {
                     Name = "Editar",
@@ -172,10 +141,6 @@ namespace GestionInventario
             catch (Exception)
             {
                 debugStatusBar.Text = "No hay datos a mostrar.";
-            }
-            finally
-            {
-                sqlCon.Close();
             }
         }
 
@@ -214,8 +179,8 @@ namespace GestionInventario
                 {
                     DataGridViewRow rowValue = dataGridtab2.Rows[e.RowIndex];
                     string id = rowValue.Cells["id"].Value.ToString();
-                    var new_query = new update_query();
-                    new_query.updateDb("entregado", "local", "true", id);
+                    var query_check = new query_consult();
+                    query_check.query_data(id);
                     loadDB2();
                 }
                 catch { }
@@ -276,11 +241,8 @@ namespace GestionInventario
                 {
                     if (searchPos.ShowDialog() == DialogResult.OK)
                     {
-                        sqlCon.Open();
-                        SQLiteDataAdapter sqlA = new SQLiteDataAdapter("SELECT * FROM inventario WHERE id = " + searchPos.artId, sqlCon);
-                        DataTable dT = new DataTable();
-                        sqlA.Fill(dT);
-                        sqlCon.Close();
+                        Db_search Db = new Db_search();
+                        DataTable dT = Db.Search_query("SELECT * FROM inventario WHERE id = " + searchPos.artId);
                         int rowCount = shopList.Rows.Add();
                         DataGridViewRow newRow = shopList.Rows[rowCount];
                         newRow.Cells["id"].Value = dT.Rows[0]["id"].ToString();
@@ -317,7 +279,7 @@ namespace GestionInventario
                 int valor1 = int.Parse(updateRow.Cells["qty"].Value.ToString());
                 int valor2 = int.Parse(updateRow.Cells["price"].Value.ToString());
 
-                updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString() ;
+                updateRow.Cells["totalQty"].Value = (valor1 * valor2).ToString();
                 int suma = 0;
                 foreach (DataGridViewRow row in shopList.Rows) 
                 {
@@ -360,9 +322,8 @@ namespace GestionInventario
                 iditemList.Add(row.Cells["id"].Value.ToString());
                 priceitemList.Add(row.Cells["price"].Value.ToString());
                 qtyitemList.Add(row.Cells["qty"].Value.ToString());
-                SQLiteDataAdapter sqlDadp = new SQLiteDataAdapter("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value, sqlCon);
-                DataTable dtID = new DataTable();
-                sqlDadp.Fill(dtID);
+                Db_search DB = new Db_search();
+                DataTable dtID = DB.Search_query("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value);
                 int cantidad = (int.Parse(dtID.Rows[0][0].ToString()) - int.Parse(row.Cells["qty"].Value.ToString()));
                 if (cantidad > 0)
                 {
@@ -442,6 +403,7 @@ namespace GestionInventario
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db"))
                 {
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
+                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + "data.db", AppDomain.CurrentDomain.BaseDirectory + "backupdb.db");
                 }
                 else
                 {
@@ -458,6 +420,23 @@ namespace GestionInventario
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            string search_args = searchBoxInv.Text;
+            Form search = new inv_Search(search_args);
+            search.Show();
+        }
+
+        private void dataGridtab2_VisibleChanged(object sender, EventArgs e)
+        {
+            loadDB2();
+        }
+
+        private void dataGridView1_VisibleChanged(object sender, EventArgs e)
+        {
+            loadDB();
         }
     }
 }
