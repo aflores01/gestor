@@ -9,8 +9,7 @@ namespace GestionInventario
 {
     public partial class Form1 : Form
     {
-        static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
-        readonly SQLiteConnection sqlCon = new SQLiteConnection(urI);
+        static readonly Db_search Db = new Db_search();
         
         public Form1()
         {
@@ -26,7 +25,7 @@ namespace GestionInventario
                 Form newReg = new newReg(dataBase);
                 if (newReg.ShowDialog() == DialogResult.OK)
                 {
-                    loadDB();
+                    LoadDB();
                 }
             }
             else if (tabControl1.SelectedTab == tabPage2)
@@ -35,7 +34,7 @@ namespace GestionInventario
                 Form newReg = new newReg(dataBase);
                 if (newReg.ShowDialog() == DialogResult.OK)
                 {
-                    loadDB2();
+                    LoadDB2();
                 }
             }
             else
@@ -44,19 +43,18 @@ namespace GestionInventario
             }
         }
 
-        public void loadDB()
+        public void LoadDB()
         {
             dataGridView1.DataSource = null;
             try
             {
-                Db_search dbQuery = new Db_search();
-                DataTable costo = dbQuery.Search_query("SELECT SUM(costo) FROM equipos");
+                DataTable costo = Db.Search_query("SELECT SUM(costo) FROM equipos");
                 saldoLabel.Text = "$" + costo.Rows[0][0].ToString();
-                DataTable saldo = dbQuery.Search_query("SELECT SUM(saldo) FROM equipos");
+                DataTable saldo = Db.Search_query("SELECT SUM(saldo) FROM equipos");
                 totalCashLabel.Text = "$" + saldo.Rows[0][0].ToString();
-                DataTable totales = dbQuery.Search_query("SELECT SUM(costo) - SUM(saldo) FROM equipos");
+                DataTable totales = Db.Search_query("SELECT SUM(costo) - SUM(saldo) FROM equipos");
                 adeudCashLabel.Text = "$" + totales.Rows[0][0].ToString();
-                DataTable content = dbQuery.Search_query("SELECT * FROM equipos");
+                DataTable content = Db.Search_query("SELECT * FROM equipos");
                 dataGridView1.DataSource = content;
                 DataGridViewButtonColumn delButn = new DataGridViewButtonColumn 
                 {
@@ -91,13 +89,12 @@ namespace GestionInventario
             }
         }
 
-        public void loadDB2()
+        public void LoadDB2()
         {
             dataGridtab2.DataSource = null;
             try
             {
-                Db_search DBQuery = new Db_search();
-                DataTable dt = DBQuery.Search_query("SELECT * from local where entregado ISNULL ORDER BY id DESC LIMIT 50");
+                DataTable dt = Db.Search_query("SELECT * from local where entregado ISNULL ORDER BY id DESC LIMIT 50");
                 dataGridtab2.DataSource = dt;
                 DataGridViewButtonColumn collected = new DataGridViewButtonColumn
                 {
@@ -169,8 +166,8 @@ namespace GestionInventario
                 bdeditForm.Tag = iD;
                 if (bdeditForm.ShowDialog() == DialogResult.OK)
                 {
-                    loadDB();
-                    loadDB2();
+                    LoadDB();
+                    LoadDB2();
                 }
             }
             else if (e.ColumnIndex == dataGridtab2.Columns["Entregar"].Index) 
@@ -181,7 +178,7 @@ namespace GestionInventario
                     string id = rowValue.Cells["id"].Value.ToString();
                     var query_check = new query_consult();
                     query_check.query_data(id);
-                    loadDB2();
+                    LoadDB2();
                 }
                 catch { }
             }
@@ -198,7 +195,7 @@ namespace GestionInventario
                 bdeditForm.Tag = iD;
                 if (bdeditForm.ShowDialog() == DialogResult.OK) 
                 {
-                    loadDB();
+                    LoadDB();
                 }
             }
             if (e.ColumnIndex == dataGridView1.Columns["Borrar"].Index) 
@@ -210,13 +207,14 @@ namespace GestionInventario
                     string iD = rowNum.Cells["id"].Value.ToString();
                     string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
                     SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
+
                     using (SQLiteCommand delCmnd = new SQLiteCommand("DELETE FROM equipos WHERE id = " + iD, sqlCon)) 
                     {
                         sqlCon.Open();
                         delCmnd.ExecuteNonQuery();
                         sqlCon.Close();
                     };
-                    loadDB();
+                    LoadDB();
                 }
             }
         }
@@ -241,7 +239,6 @@ namespace GestionInventario
                 {
                     if (searchPos.ShowDialog() == DialogResult.OK)
                     {
-                        Db_search Db = new Db_search();
                         DataTable dT = Db.Search_query("SELECT * FROM inventario WHERE id = " + searchPos.artId);
                         int rowCount = shopList.Rows.Add();
                         DataGridViewRow newRow = shopList.Rows[rowCount];
@@ -267,7 +264,7 @@ namespace GestionInventario
             Form newIncoming = new incomingRecord();
             if (newIncoming.ShowDialog() == DialogResult.OK)
             {
-                loadDB();
+                LoadDB();
             }
         }
 
@@ -322,19 +319,11 @@ namespace GestionInventario
                 iditemList.Add(row.Cells["id"].Value.ToString());
                 priceitemList.Add(row.Cells["price"].Value.ToString());
                 qtyitemList.Add(row.Cells["qty"].Value.ToString());
-                Db_search DB = new Db_search();
-                DataTable dtID = DB.Search_query("SELECT qty FROM inventario WHERE id = " + row.Cells["id"].Value);
+                DataTable dtID = Db.Search_query("SELECT qty FROM inventario WHERE id = '" + row.Cells["id"].Value + "'");
                 int cantidad = (int.Parse(dtID.Rows[0][0].ToString()) - int.Parse(row.Cells["qty"].Value.ToString()));
-                if (cantidad > 0)
+                if (cantidad >= 0)
                 {
-                    using (SQLiteCommand slqc = new SQLiteCommand("UPDATE inventario SET qty = @qty WHERE id = @id", sqlCon))
-                    {
-                        sqlCon.Open();
-                        slqc.Parameters.Add(new SQLiteParameter("@id") { Value = row.Cells["id"].Value });
-                        slqc.Parameters.Add(new SQLiteParameter("@qty") { Value = cantidad });
-                        slqc.ExecuteNonQuery();
-                        sqlCon.Close();
-                    };
+                    Db.Execute_Query("UPDATE inventario SET qty = '" + cantidad + "' WHERE id = '" + row.Cells["id"].Value + "'");
                 }
                 else
                 {
@@ -358,20 +347,7 @@ namespace GestionInventario
             }
             try
             {
-                using (SQLiteCommand sqlc = new SQLiteCommand("INSERT INTO sales(date,client,items,unit_p,qty,discount,coment) values(@date,@client,@items,@unit_p,@qty,@discount,@coment)", sqlCon))
-                {
-                    sqlc.Parameters.Add(new SQLiteParameter("@date") { Value = DateTime.Now });
-                    sqlc.Parameters.Add(new SQLiteParameter("@client") { Value = clienTextBox.Text });
-                    sqlc.Parameters.Add(new SQLiteParameter("@items") { Value = listId });
-                    sqlc.Parameters.Add(new SQLiteParameter("@unit_p") { Value = pricesStr });
-                    sqlc.Parameters.Add(new SQLiteParameter("@qty") { Value = qtyStr });
-                    sqlc.Parameters.Add(new SQLiteParameter("@discount") { Value = disccountBox.Text });
-                    sqlc.Parameters.Add(new SQLiteParameter("@coment") { Value = comentBox.Text });
-                    sqlCon.Open();
-                    sqlc.ExecuteNonQuery();
-                    sqlCon.Close();
-
-                };
+                Db.Execute_Query("INSERT INTO sales(date,client,items,unit_p,qty,discount,coment) values('" + DateTime.Now + "','" + clienTextBox.Text + "','" + listId + "','" + pricesStr + "','" + qtyStr + "','" + disccountBox.Text + "','" +comentBox.Text + "')");
             }
             catch (Exception x)
             {
@@ -431,12 +407,12 @@ namespace GestionInventario
 
         private void dataGridtab2_VisibleChanged(object sender, EventArgs e)
         {
-            loadDB2();
+            LoadDB2();
         }
 
         private void dataGridView1_VisibleChanged(object sender, EventArgs e)
         {
-            loadDB();
+            LoadDB();
         }
     }
 }
