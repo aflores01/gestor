@@ -10,10 +10,12 @@ namespace GestionInventario
     public partial class Form1 : Form
     {
         static readonly Db_search Db = new Db_search();
+        string limit;
         
         public Form1()
         {
             InitializeComponent();
+            limit = "50";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -94,7 +96,7 @@ namespace GestionInventario
             dataGridtab2.DataSource = null;
             try
             {
-                DataTable dt = Db.Search_query("SELECT * from local where entregado ISNULL ORDER BY id DESC LIMIT 50");
+                DataTable dt = Db.Search_query("SELECT * from local where entregado ISNULL ORDER BY id DESC LIMIT "+ limit);
                 dataGridtab2.DataSource = dt;
                 DataGridViewButtonColumn collected = new DataGridViewButtonColumn
                 {
@@ -413,6 +415,12 @@ namespace GestionInventario
         private void dataGridView1_VisibleChanged(object sender, EventArgs e)
         {
             LoadDB();
+        }
+
+        private void listboxItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            limit = "100";
+            LoadDB2();
         }
     }
 }

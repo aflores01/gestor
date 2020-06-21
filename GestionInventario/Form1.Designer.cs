@@ -81,6 +81,7 @@
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.impresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listboxItems = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -471,6 +472,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listboxItems);
             this.tabPage2.Controls.Add(this.searchBtn);
             this.tabPage2.Controls.Add(this.searchBoxInv);
             this.tabPage2.Controls.Add(this.button1);
@@ -500,7 +502,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBoxInv.Location = new System.Drawing.Point(327, 11);
             this.searchBoxInv.Name = "searchBoxInv";
-            this.searchBoxInv.Size = new System.Drawing.Size(1133, 22);
+            this.searchBoxInv.Size = new System.Drawing.Size(1007, 22);
             this.searchBoxInv.TabIndex = 2;
             // 
             // button1
@@ -712,6 +714,22 @@
             this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             // 
+            // listboxItems
+            // 
+            this.listboxItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.listboxItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listboxItems.FormattingEnabled = true;
+            this.listboxItems.ItemHeight = 25;
+            this.listboxItems.Items.AddRange(new object[] {
+            "50",
+            "100",
+            "Full"});
+            this.listboxItems.Location = new System.Drawing.Point(1340, 8);
+            this.listboxItems.Name = "listboxItems";
+            this.listboxItems.Size = new System.Drawing.Size(120, 29);
+            this.listboxItems.TabIndex = 4;
+            this.listboxItems.SelectedIndexChanged += new System.EventHandler(this.listboxItems_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -800,6 +818,7 @@
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backupDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ListBox listboxItems;
     }
 }
 
