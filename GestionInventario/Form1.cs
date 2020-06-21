@@ -419,8 +419,30 @@ namespace GestionInventario
 
         private void listboxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            limit = "100";
-            LoadDB2();
+            if (listboxItems.SelectedItem.ToString() == "50")
+            {
+                limit = "50";
+                LoadDB2();
+            }
+            else if (listboxItems.SelectedItem.ToString() == "100")
+            {
+                limit = "100";
+                LoadDB2();
+            }
+            else 
+            {
+                limit = "9999";
+                LoadDB2();
+            }
+        }
+
+        private void searchBoxInv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) {
+                string search_args = searchBoxInv.Text;
+                Form search = new inv_Search(search_args);
+                search.Show();
+            }
         }
     }
 }
