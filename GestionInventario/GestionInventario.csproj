@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -62,6 +62,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>GestionInventario.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -115,6 +118,7 @@
       <DependentUpon>bdeditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="checkStock.cs" />
+    <Compile Include="class\Db_search.cs" />
     <Compile Include="class\query_consult.cs" />
     <Compile Include="class\update_query.cs" />
     <Compile Include="Form1.cs">
@@ -128,6 +132,12 @@
     </Compile>
     <Compile Include="incomingRecord.Designer.cs">
       <DependentUpon>incomingRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="inv_Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv_Search.Designer.cs">
+      <DependentUpon>inv_Search.cs</DependentUpon>
     </Compile>
     <Compile Include="newReg.cs">
       <SubType>Form</SubType>
@@ -184,6 +194,9 @@
     <EmbeddedResource Include="incomingRecord.resx">
       <DependentUpon>incomingRecord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="inv_Search.resx">
+      <DependentUpon>inv_Search.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="newReg.resx">
       <DependentUpon>newReg.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,7 +228,6 @@
     <EmbeddedResource Include="storedInv.resx">
       <DependentUpon>storedInv.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="GestionInventario_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

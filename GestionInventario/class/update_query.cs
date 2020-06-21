@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-public class update_query
+public class Update_query
 {
     static readonly string urI = @"URI=file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
     SQLiteConnection sqlCon = new SQLiteConnection(urI);
 
-    public void updateDb(string p_aram, string b_ase, string v_al, string i_d) 
+    public void UpdateDb(string p_aram, string b_ase, string v_al, string i_d) 
     {
         using (SQLiteCommand slqc = new SQLiteCommand("UPDATE " + b_ase + " SET " + p_aram + " = @Val WHERE id = @id", sqlCon))
         {

@@ -14,7 +14,8 @@ namespace GestionInventario
 {
     public partial class newReg : Form
     {
-        string baseSelected = "";
+        string baseSelected;
+
         public newReg(string dbSelect)
         {
             InitializeComponent();
@@ -51,25 +52,19 @@ namespace GestionInventario
             {
                 try
                 {
-                    string uriDB = @"URI = file:" + AppDomain.CurrentDomain.BaseDirectory + "/data.db";
-                    SQLiteConnection sqlCon = new SQLiteConnection(uriDB);
-                    using (SQLiteCommand insertData = new SQLiteCommand("INSERT INTO "+ baseSelected +" (modelo,cliente,fecha,telefono,reparacion,costo,coment) values(@modelo,@cliente,@fecha,@telefono,@reparacion,@costo,@coment)", sqlCon))
-                    {
-                        insertData.Parameters.Add(new SQLiteParameter("@modelo") { Value = inputEquipo.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@cliente") { Value = inputCliente.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@fecha") { Value = DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() });
-                        insertData.Parameters.Add(new SQLiteParameter("@telefono") { Value = inputTelefono.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@reparacion") { Value = inputFalla.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@costo") { Value = inputCost.Text });
-                        insertData.Parameters.Add(new SQLiteParameter("@coment") { Value = inputComent.Text });
-                        sqlCon.Open();
-                        insertData.ExecuteNonQuery();
-                        sqlCon.Close();
-                        if (baseSelected == "local") {
-                            ticketClass tick = new ticketClass();
-                            tick.PrintTicket(inputCliente.Text, inputTelefono.Text, inputEquipo.Text, inputFalla.Text, inputCost.Text, inputComent.Text); 
-                        }
-                    };
+                    Db_search db = new Db_search();
+                    db.Execute_Query("INSERT INTO " + baseSelected + " (modelo,cliente,fecha,telefono,reparacion,costo,coment) values('" +
+                        inputEquipo.Text + "','" +
+                        inputCliente.Text + "','" +
+                        DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + "','" +
+                        inputTelefono.Text + "','" +
+                        inputFalla.Text + "','" +
+                        inputCost.Text + "','" +
+                        inputComent.Text +"')");
+                    if (baseSelected == "local") {
+                        ticketClass tick = new ticketClass();
+                        tick.PrintTicket(inputCliente.Text, inputTelefono.Text, inputEquipo.Text, inputFalla.Text, inputCost.Text, inputComent.Text); 
+                    }
                 }
                 catch (Exception r)
                 {
