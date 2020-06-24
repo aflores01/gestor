@@ -17,7 +17,7 @@ namespace GestionInventario
             recibo.AddHeaderLine("LUN - SAB 9:30 - 19:00");
             recibo.AddHeaderLine("AV MEXICO 111, DOS RIOS");
             recibo.AddHeaderLine("HUIXQUILUCAN MÉXICO 52790");
-            recibo.AddHeaderLine("55 8284 2550");
+            recibo.AddHeaderLine(Properties.Settings.Default.contact_number.ToString());
             recibo.AddSubHeaderLine("");
             recibo.AddSubHeaderLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString());
             recibo.AddHeaderLine("");

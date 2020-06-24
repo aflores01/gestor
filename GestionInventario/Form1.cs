@@ -364,5 +364,11 @@ namespace GestionInventario
                 search.Show();
             }
         }
+
+        private void teléfonoDeContactoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            contact_number cn = new contact_number();
+            cn.Show();
+        }
     }
 }
