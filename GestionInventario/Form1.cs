@@ -360,6 +360,7 @@ namespace GestionInventario
             if (e.KeyChar == (char)Keys.Enter) {
                 string search_args = searchBoxInv.Text;
                 Form search = new inv_Search(search_args);
+                searchBoxInv.Text = null;
                 search.Show();
             }
         }
