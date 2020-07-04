@@ -121,6 +121,12 @@
     <Compile Include="class\Db_search.cs" />
     <Compile Include="class\query_consult.cs" />
     <Compile Include="class\update_query.cs" />
+    <Compile Include="contact_number.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="contact_number.Designer.cs">
+      <DependentUpon>contact_number.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="bdeditForm.resx">
       <DependentUpon>bdeditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="contact_number.resx">
+      <DependentUpon>contact_number.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

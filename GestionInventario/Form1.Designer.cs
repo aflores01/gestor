@@ -82,6 +82,7 @@
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.impresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teléfonoDeContactoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -663,14 +664,14 @@
             // backupDatabaseToolStripMenuItem
             // 
             this.backupDatabaseToolStripMenuItem.Name = "backupDatabaseToolStripMenuItem";
-            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.backupDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backupDatabaseToolStripMenuItem.Text = "Backup database";
             this.backupDatabaseToolStripMenuItem.Click += new System.EventHandler(this.backupDatabaseToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -684,7 +685,8 @@
             // 
             this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.impresoraToolStripMenuItem,
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.teléfonoDeContactoToolStripMenuItem});
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
             this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.configuraciónToolStripMenuItem.Text = "Configuración";
@@ -692,15 +694,22 @@
             // impresoraToolStripMenuItem
             // 
             this.impresoraToolStripMenuItem.Name = "impresoraToolStripMenuItem";
-            this.impresoraToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.impresoraToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.impresoraToolStripMenuItem.Text = "Impresora";
             this.impresoraToolStripMenuItem.Click += new System.EventHandler(this.impresoraToolStripMenuItem_Click);
             // 
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // teléfonoDeContactoToolStripMenuItem
+            // 
+            this.teléfonoDeContactoToolStripMenuItem.Name = "teléfonoDeContactoToolStripMenuItem";
+            this.teléfonoDeContactoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.teléfonoDeContactoToolStripMenuItem.Text = "Teléfono de contacto";
+            this.teléfonoDeContactoToolStripMenuItem.Click += new System.EventHandler(this.teléfonoDeContactoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -791,6 +800,7 @@
         private System.Windows.Forms.ToolStripMenuItem backupDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ListBox listboxItems;
+        private System.Windows.Forms.ToolStripMenuItem teléfonoDeContactoToolStripMenuItem;
     }
 }
 
